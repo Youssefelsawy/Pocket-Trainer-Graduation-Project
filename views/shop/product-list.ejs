@@ -27,6 +27,9 @@
                                     </p>
                                 </div>
                                 <div class="card__actions">
+                                    <form action="/product/<%= product.id %>" method="get">
+                                        <button class="btn">Details</button>
+                                    </form>
                                     <form action="/add-to-cart" method="POST">
                                         <button class="btn">Add to Cart</button>
                                     </form>
