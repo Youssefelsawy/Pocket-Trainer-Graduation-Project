@@ -5,7 +5,6 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
 const User = require('./models/user');
-
 const errorController = require('./controllers/error');
 
 const MONGODB_URI = 'mongodb+srv://youssefelsawy:7WE62UIa4j25Yd31@cluster0.4uq3vsh.mongodb.net/pocketTrainer?retryWrites=true&w=majority'
