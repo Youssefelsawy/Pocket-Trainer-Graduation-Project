@@ -1,39 +1,55 @@
-const path = require('path');
-
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
-const mongoConnect = require('./util/database').mongoConnect;
 const User = require('./models/user');
 
 const errorController = require('./controllers/error');
 
+const MONGODB_URI = 'mongodb+srv://youssefelsawy:7WE62UIa4j25Yd31@cluster0.4uq3vsh.mongodb.net/pocketTrainer?retryWrites=true&w=majority'
 const app = express();
-
-app.set('view engine', 'ejs');
-app.set('views', 'views');
+const store = new MongoDBStore({
+    uri: MONGODB_URI,
+    collection: 'sessions'
+});
 
 const adminRoutes = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
-const { findById } = require('./models/product');
+const userRoutes = require('./routes/user');
+const authRoutes = require('./routes/auth')
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(
+    session({
+        secret: 'my secret',
+        resave: false,
+        saveUninitialized: true,
+        store: store
+    })
+);
+app.use(authRoutes);
 app.use((req, res, next) => {
-    User.findById('64206e94225675faafb2b1f5')
+    User.findById(req.session.userId)
     .then(user => {
-        req.user = new User(user.name, user.email, user.cart, user._id);
+        req.user = user;
         next();
     })
     .catch(err => {console.log(err)});
 })
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/admin', adminRoutes);
-app.use(shopRoutes);
+app.use(userRoutes);
 
 app.use(errorController.get404);
 
-mongoConnect(() => {
+mongoose.connect(MONGODB_URI)
+.then(result => {
     app.listen(3000);
-});
+    console.log('connected!');
+})
+.catch(err => {
+    console.log(err);
+})
