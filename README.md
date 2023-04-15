@@ -1,4 +1,4 @@
-# Pocket-Trainer-Graduation-Project
+## Pocket-Trainer-Graduation-Project
 -Gym Application who helps you in your training and correct your form and counting the right movement
 -Create and Mange WorkoutPlan, NutritionPlan based on some question we ask to the user
 -tips and information in every exercise to avoid injuries
