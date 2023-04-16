@@ -2,7 +2,7 @@
 
 
 - Gym Mobile Application using flutter
-- who helps you in your training and correct your form
+- helps you in your training and correct your form
 - Counting the right movement.
 - Create and Mange WorkoutPlan, NutritionPlan based on some question we ask to the user.
 - Tips and information in every exercise to avoid injuries.
