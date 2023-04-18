@@ -39,7 +39,7 @@ router.post('/add-meal-to-nutritionPlan/:mealId', isAuth, fetchingMealSControlle
 
 router.post('/delete-meal-from-nutritionPlan/:mealId', isAuth, fetchingMealSController.postNutritionDeleteMeal);
 
-router.get('/nutritionplan', isAuth, fetchingMealSController.getNutritionPlan)
+router.get('/nutritionplan', isAuth, fetchingMealSController.getNutritionPlan);
 
 
 //Stretch Routes
