@@ -12,7 +12,7 @@ exports.postLogin = async (req, res) => {
       res.status(401).send('Invalid email or password');
       return;
     }
-    req.session.userId = user._id;;
+    req.session.userId = user._id;
     res.send('Logged in successfully');
   }
 
