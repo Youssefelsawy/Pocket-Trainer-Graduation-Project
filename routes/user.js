@@ -4,6 +4,8 @@ const fetchingExerciseSController = require('../controllers/fetching-exercise(s)
 
 const fetchingMealSController = require('../controllers/fetching-meal(s)');
 
+const fetchingStretcheSController = require('../controllers/fetching-stretch(s)');
+
 const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
@@ -38,6 +40,20 @@ router.post('/add-meal-to-nutritionPlan/:mealId', isAuth, fetchingMealSControlle
 router.post('/delete-meal-from-nutritionPlan/:mealId', isAuth, fetchingMealSController.postNutritionDeleteMeal);
 
 router.get('/nutritionplan', isAuth, fetchingMealSController.getNutritionPlan)
+
+
+//Stretch Routes
+router.get('/chest/stretches', fetchingStretcheSController.getChestStretches);
+
+router.get('/arm/stretches', fetchingStretcheSController.getArmStretches);
+
+router.get('/back/stretches', fetchingStretcheSController.getBackStretches);
+
+router.get('/leg/stretches', fetchingStretcheSController.getLegStretches);
+
+router.get('/shoulder/stretches', fetchingStretcheSController.getShloulderStretches);
+
+router.get('/stretch/:stretchId', fetchingStretcheSController.getStretchById);
 
 
 module.exports = router;
