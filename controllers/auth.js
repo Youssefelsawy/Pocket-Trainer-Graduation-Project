@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
+const fs = require('fs');
+
 
 exports.postLogin = async (req, res) => {
     const { email, password } = req.body;
@@ -45,9 +47,18 @@ exports.signUp = async (req, res) => {
         user = new User({
             name,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            // photo: {
+            //   data: fs.readFileSync(req.file.path),
+            //   contentType: req.file.mimetype
+            // }
           });
+          if(req.file) {
+            user.photo.data = fs.readFileSync(req.file.path);
+            user.photo.contentType = req.file.mimetype;
+          }
           await user.save();
+          
           // Set user id in session
           req.session.userId = user._id;
     
@@ -62,6 +73,12 @@ exports.signUp = async (req, res) => {
 exports.getProfile = async (req, res) => {
     // Fetch user from database using the user ID in the session
     const user = await User.findById(req.session.userId);
-  
-    res.send(`Welcome back, ${user.name}`);
+    const userData = {
+      name: user.name,
+      email: user.email,
+      photo: user.photo.data.toString('base64'),
+      contentType: user.photo.contentType
+    };
+    res.send(userData);
+    // res.send(`Welcome back, ${user.name}`);
   };
