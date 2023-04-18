@@ -15,6 +15,8 @@ router.post('/add-exercise', adminController.postAddExercise);
 
 router.post('/add-meal', adminController.postAddMeal);
 
+router.post('/add-stretch', adminController.postAddStretch)
+
 // router.get('/edit-product/:productId', adminController.getEditProduct);
 
 // router.post('/edit-product', adminController.postEditProduct);
