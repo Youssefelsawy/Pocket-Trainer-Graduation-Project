@@ -17,6 +17,10 @@ const stretch_Schema = new Schema({
       duration: {
         type: Number,
         required: true
+      },
+      description: {
+        type: String,
+        required: true
       }
 })
 

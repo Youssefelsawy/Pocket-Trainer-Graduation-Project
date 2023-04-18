@@ -63,11 +63,13 @@ exports.postAddStretch = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const bodyPart = req.body.bodyPart;
   const duration = req.body.duration;
+  const description = req.body.description;
   const stretch = new Stretch({
     name: name,
     bodyPart: bodyPart,
     duration: duration,
-    imageUrl: imageUrl
+    imageUrl: imageUrl,
+    description: description
   });
   stretch.save()
   .then(result => {
