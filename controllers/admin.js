@@ -1,5 +1,6 @@
 const Exercise = require('../models/exercise');
 const Meal = require('../models/meal');
+const Stretch = require('../models/stretch');
 
 
 exports.postAddExercise = (req, res, next) => {
@@ -56,6 +57,27 @@ exports.postAddMeal = (req, res, next) => {
   })
 };
 
+
+exports.postAddStretch = (req, res, next) => {
+  const name = req.body.name;
+  const imageUrl = req.body.imageUrl;
+  const bodyPart = req.body.bodyPart;
+  const duration = req.body.duration;
+  const stretch = new Stretch({
+    name: name,
+    bodyPart: bodyPart,
+    duration: duration,
+    imageUrl: imageUrl
+  });
+  stretch.save()
+  .then(result => {
+    console.log('stretch created');
+    res.send(result);
+  })
+  .catch(err => {
+    console.log(err);
+  })
+};
 
 // exports.getEditProduct = (req, res, next) => {
 //   const editMode = req.query.edit;
