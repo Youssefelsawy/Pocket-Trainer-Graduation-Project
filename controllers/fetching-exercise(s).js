@@ -12,7 +12,6 @@ exports.getChestExercises = (req, res, next) => {
 
 exports.getBicepsExercises = (req, res, next) => {
   Exercise.find({'bodyPart': 'biceps'})
-  //assas
   .then(exercises => {
     res.send(exercises);
   })

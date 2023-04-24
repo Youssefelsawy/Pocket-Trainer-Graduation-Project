@@ -34,7 +34,7 @@ const userSchema = new Schema({
                 sets: { type: Number, required: true },
                 repetition: { type: Number, required: true },
                 tips: { type: String, required: false }
-            }
+            }//omar
         ]
     },
     NutritionPlan: {
