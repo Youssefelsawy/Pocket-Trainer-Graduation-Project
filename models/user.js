@@ -28,7 +28,12 @@ const userSchema = new Schema({
                 exerciseId: { type: Schema.Types.ObjectId, ref: 'Exercise', required: true },
                 name: { type: String, required: true },
                 imageUrl: { type: String, required: true },
-                bodyPart: { type: String, required: true }
+                bodyPart: { type: String, required: true },
+                target: { type: String, required: true },
+                description: { type: String, required: true },
+                sets: { type: Number, required: true },
+                repetition: { type: Number, required: true },
+                tips: { type: String, required: false }
             }
         ]
     },
@@ -62,7 +67,12 @@ userSchema.methods.addToWorkoutPlan = function(exercise) {
                 exerciseId: exercise._id,
                 name: exercise.name,
                 imageUrl: exercise.imageUrl,
-                bodyPart: exercise.bodyPart
+                bodyPart: exercise.bodyPart,
+                target: exercise.target,
+                description: exercise.description,
+                tips: exercise.tips,
+                repetition: exercise.repetition,
+                sets: exercise.sets
             });
         }
         // const updatedWorkoutPlan = {
