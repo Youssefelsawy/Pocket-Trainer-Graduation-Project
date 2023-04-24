@@ -13,7 +13,9 @@ const router = express.Router();
 //Exercise Routes
 router.get('/chest/exercises', fetchingExerciseSController.getChestExercises);
 
-router.get('/arm/exercises', fetchingExerciseSController.getArmExercises);
+router.get('/biceps/exercises', fetchingExerciseSController.getBicepsExercises);
+
+router.get('/triceps/exercises', fetchingExerciseSController.getTricepsExercises);
 
 router.get('/leg/exercises', fetchingExerciseSController.getLegExercises);
 
