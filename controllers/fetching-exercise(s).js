@@ -3,16 +3,25 @@ const Exercise = require('../models/exercise');
 
 exports.getChestExercises = (req, res, next) => {
   Exercise.find({'bodyPart': 'chest'})
-  .select('name imageUrl bodyPart')
+  
   .then(exercises => {
     res.send(exercises);
   })
   .catch(err => console.log(err));
 };
 
-exports.getArmExercises = (req, res, next) => {
-  Exercise.find({'bodyPart': 'arm'})
-  .select('name imageUrl bodyPart')
+exports.getBicepsExercises = (req, res, next) => {
+  Exercise.find({'bodyPart': 'biceps'})
+  
+  .then(exercises => {
+    res.send(exercises);
+  })
+  .catch(err => console.log(err));
+};
+
+exports.getTricepsExercises = (req, res, next) => {
+  Exercise.find({'bodyPart': 'triceps'})
+  
   .then(exercises => {
     res.send(exercises);
   })
@@ -21,7 +30,7 @@ exports.getArmExercises = (req, res, next) => {
 
 exports.getLegExercises = (req, res, next) => {
   Exercise.find({'bodyPart': 'leg'})
-  .select('name imageUrl bodyPart')
+  
   .then(exercises => {
     res.send(exercises);
   })
@@ -30,7 +39,7 @@ exports.getLegExercises = (req, res, next) => {
 
 exports.getBackExercises = (req, res, next) => {
   Exercise.find({'bodyPart': 'back'})
-  .select('name imageUrl bodyPart')
+  
   .then(exercises => {
     res.send(exercises);
   })
@@ -39,7 +48,7 @@ exports.getBackExercises = (req, res, next) => {
 
 exports.getShoulderExercises = (req, res, next) => {
   Exercise.find({'bodyPart': 'shoulder'})
-  .select('name imageUrl bodyPart')
+  
   .then(exercises => {
     res.send(exercises);
   })
@@ -65,7 +74,7 @@ exports.getWorkoutPlan = (req, res, next) => {
 
 exports.postWorkoutPlan = (req, res, next) => {
   const exerciseId = req.params.exerciseId;
-  Exercise.findById(exerciseId).select('name imageUrl bodyPart')
+  Exercise.findById(exerciseId)
   .then(exercise => {
     return req.user.addToWorkoutPlan(exercise);
   }).then(result => {
