@@ -35,7 +35,7 @@ exports.postAddExercise = (req, res, next) => {
 exports.postAddMeal = (req, res, next) => {
   const name = req.body.name;
   const imageUrl = req.body.imageUrl;
-  const protein = req.body.protien;
+  const protein = req.body.protein;
   const fats = req.body.fats;
   const carbs = req.body.carbs;
   const calories = req.body.calories;
