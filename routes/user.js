@@ -37,7 +37,7 @@ router.get('/meals', fetchingMealSController.getMeals);
 
 router.get('/meal/:mealId', fetchingMealSController.getMealById);
 
-router.post('/add-meal-to-nutritionPlan/:mealId', isAuth, fetchingMealSController.postNutritionPlan);
+router.post('/add-meal-to-nutritionPlan/:mealId', isAuth, fetchingMealSController.postNutritionAddMeal);
 
 router.post('/delete-meal-from-nutritionPlan/:mealId', isAuth, fetchingMealSController.postNutritionDeleteMeal);
 
@@ -47,7 +47,9 @@ router.get('/nutritionplan', isAuth, fetchingMealSController.getNutritionPlan);
 //Stretch Routes
 router.get('/chest/stretches', fetchingStretcheSController.getChestStretches);
 
-router.get('/arm/stretches', fetchingStretcheSController.getArmStretches);
+router.get('/biceps/stretches', fetchingStretcheSController.getBicepsStretches);
+
+router.get('/triceps/stretches', fetchingStretcheSController.getTricepsStretches);
 
 router.get('/back/stretches', fetchingStretcheSController.getBackStretches);
 

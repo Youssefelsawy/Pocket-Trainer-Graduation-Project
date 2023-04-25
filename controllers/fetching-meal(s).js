@@ -18,7 +18,7 @@ exports.getMeals = (req, res, next) => {
   };
   
 
-  exports.postNutritionPlan = (req, res, next) => {
+  exports.postNutritionAddMeal = (req, res, next) => {
     const mealId = req.params.mealId;
     Meal.findById(mealId)
       .then(meal => {
