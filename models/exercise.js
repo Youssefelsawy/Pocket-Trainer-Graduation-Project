@@ -23,7 +23,7 @@ const exercise_Schema = new Schema({
     required: false
   },
   repetition: {
-    type: Number,
+    type: [String, Number],
     required: true
   },
   sets: {
