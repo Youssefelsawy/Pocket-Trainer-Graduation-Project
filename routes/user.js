@@ -23,6 +23,8 @@ router.get('/back/exercises', fetchingExerciseSController.getBackExercises);
 
 router.get('/shoulder/exercises', fetchingExerciseSController.getShoulderExercises);
 
+router.get('/core/exercises', fetchingExerciseSController.getCoreExercises);
+
 router.get('/exercise/:exerciseId', fetchingExerciseSController.getExerciseById);
 
 router.post('/add-exercise-to-wourkoutplan/:exerciseId',isAuth, fetchingExerciseSController.postWorkoutPlan);
