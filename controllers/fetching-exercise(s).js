@@ -54,6 +54,15 @@ exports.getShoulderExercises = (req, res, next) => {
   .catch(err => console.log(err));
 };
 
+exports.getCoreExercises = (req, res, next) => {
+  Exercise.find({'bodyPart': 'core'})
+  
+  .then(exercises => {
+    res.send(exercises);
+  })
+  .catch(err => console.log(err));
+};
+
 exports.getExerciseById = (req, res, next) => {
   const exerciseId = req.params.exerciseId;
   Exercise.findById(exerciseId) 
