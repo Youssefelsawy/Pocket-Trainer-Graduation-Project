@@ -7,7 +7,7 @@ exports.getChestStretches = (req, res, next) => {
     })
     .catch(err => console.log(err));
   };
-
+ 
   exports.getBicepsStretches = (req, res, next) => {
     Stretch.find({'bodyPart': 'biceps'})
     .then(stretches => {
