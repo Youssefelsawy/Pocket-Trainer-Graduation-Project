@@ -35,13 +35,13 @@ exports.postAddExercise = (req, res, next) => {
 exports.postAddMeal = (req, res, next) => {
   const name = req.body.name;
   const imageUrl = req.body.imageUrl;
-  const protien = req.body.protien;
+  const protein = req.body.protien;
   const fats = req.body.fats;
   const carbs = req.body.carbs;
   const calories = req.body.calories;
   const meal = new Meal({
     name: name,
-    protien: protien,
+    protein: protein,
     imageUrl: imageUrl,
     fats: fats,
     carbs: carbs,
