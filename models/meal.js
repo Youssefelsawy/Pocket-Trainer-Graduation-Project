@@ -6,7 +6,7 @@ const meal_Schema = new Schema({
     type: String,
     required: true
   },
-  protien: {
+  protein: {
     type: String,
     required: true
   },
