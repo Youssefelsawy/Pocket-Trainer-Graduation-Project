@@ -23,11 +23,11 @@ const exercise_Schema = new Schema({
     required: false
   },
   repetition: {
-    type: [String, Number],
+    type: String,
     required: true
   },
   sets: {
-    type: Number,
+    type: String,
     required: true
   },
   imageUrl: {
