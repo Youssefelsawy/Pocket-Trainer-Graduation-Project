@@ -15,7 +15,7 @@ exports.postLogin = async (req, res) => {
       return;
     }
     req.session.userId = user._id;
-    res.send('Logged in successfully');
+    res.send(user);
   }
 
 exports.getLogin = async (req, res) => {
