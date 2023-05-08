@@ -1,12 +1,29 @@
 const Meal = require('../models/meal');
 
-exports.getMeals = (req, res, next) => {
-    Meal.find()
+exports.getBreakfastMeals = (req, res, next) => {
+    Meal.find({'typeofMeal': 'breakfast'})
     .then(meals => {
       res.send(meals);
     })
     .catch(err => console.log(err));
   };
+
+  exports.getLunchMeals = (req, res, next) => {
+    Meal.find({'typeofMeal': 'lunch'})
+    .then(meals => {
+      res.send(meals);
+    })
+    .catch(err => console.log(err));
+  };
+
+  exports.getDinnerMeals = (req, res, next) => {
+    Meal.find({'typeofMeal': 'dinner'})
+    .then(meals => {
+      res.send(meals);
+    })
+    .catch(err => console.log(err));
+  };
+
 
   exports.getMealById = (req, res, next) => {
     const mealId = req.params.mealId;
