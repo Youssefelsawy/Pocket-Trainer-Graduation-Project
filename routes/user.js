@@ -35,7 +35,11 @@ router.post('/wourkoutplan-delete-exercise/:exerciseId',isAuth, fetchingExercise
 
 
 //Meals Routes
-router.get('/meals', fetchingMealSController.getMeals);
+router.get('/breakfast', fetchingMealSController.getBreakfastMeals);
+
+router.get('/lunch', fetchingMealSController.getLunchMeals);
+
+router.get('/dinner', fetchingMealSController.getDinnerMeals);
 
 router.get('/meal/:mealId', fetchingMealSController.getMealById);
 
