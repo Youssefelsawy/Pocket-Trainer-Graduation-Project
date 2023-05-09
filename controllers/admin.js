@@ -39,6 +39,8 @@ exports.postAddMeal = (req, res, next) => {
   const fats = req.body.fats;
   const carbs = req.body.carbs;
   const calories = req.body.calories;
+  const typeofMeal = req.body.typeofMeal;
+  const quantity = req.body.quantity;
   const meal = new Meal({
     name: name,
     protein: protein,
@@ -46,6 +48,8 @@ exports.postAddMeal = (req, res, next) => {
     fats: fats,
     carbs: carbs,
     calories: calories,
+    typeofMeal: typeofMeal,
+    quantity: quantity
   });
   meal.save()
   .then(result => {

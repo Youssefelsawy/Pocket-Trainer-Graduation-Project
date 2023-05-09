@@ -35,11 +35,7 @@ router.post('/wourkoutplan-delete-exercise/:exerciseId',isAuth, fetchingExercise
 
 
 //Meals Routes
-router.get('/breakfast', fetchingMealSController.getBreakfastMeals);
-
-router.get('/lunch', fetchingMealSController.getLunchMeals);
-
-router.get('/dinner', fetchingMealSController.getDinnerMeals);
+router.get('/meals', fetchingMealSController.getMeals);
 
 router.get('/meal/:mealId', fetchingMealSController.getMealById);
 
@@ -47,7 +43,11 @@ router.post('/add-meal-to-nutritionPlan/:mealId', isAuth, fetchingMealSControlle
 
 router.post('/delete-meal-from-nutritionPlan/:mealId', isAuth, fetchingMealSController.postNutritionDeleteMeal);
 
-router.get('/nutritionplan', isAuth, fetchingMealSController.getNutritionPlan);
+router.get('/nutritionplan/breakfast', isAuth, fetchingMealSController.getBreakfastInNutritionPlan);
+
+router.get('/nutritionplan/lunch', isAuth, fetchingMealSController.getLunchInNutritionPlan);
+
+router.get('/nutritionplan/dinner', isAuth, fetchingMealSController.getDinnerInNutritionPlan);
 
 
 //Stretch Routes

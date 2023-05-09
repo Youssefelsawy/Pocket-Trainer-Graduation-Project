@@ -43,10 +43,12 @@ const userSchema = new Schema({
                 mealId: { type: Schema.Types.ObjectId, ref: 'Meal', required: true },
                 name: { type: String, required: true },
                 imageUrl: { type: String, required: true },
-                protien: { type: String, required: true },
+                protein: { type: String, required: true },
                 calories: { type: String, required: true },
                 carbs: { type: String, required: true },
-                fats: { type: String, required: true }
+                fats: { type: String, required: true },
+                typeofMeal: { type: String, required: true },
+                quantity: { type: String, required: false }
             }
         ]
     }
@@ -110,9 +112,10 @@ userSchema.methods.addToNutritionPlan = function(meal) {
             imageUrl: meal.imageUrl,
             fats: meal.fats,
             carbs: meal.carbs,
-            protien: meal.protien,
+            protein: meal.protein,
             calories: meal.calories,
-            quantity: meal.quantity
+            quantity: meal.quantity,
+            typeofMeal: meal.typeofMeal
         });
     }
     this.NutritionPlan.Meals = updatedNutritionPlanMeals;
