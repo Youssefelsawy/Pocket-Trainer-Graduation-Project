@@ -20,23 +20,23 @@ const authRoutes = require('./routes/auth')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(
-    session({
-        secret: 'my secret',
-        resave: false,
-        saveUninitialized: false,
-        store: store
-    })
-);
+// app.use(
+//     session({
+//         secret: 'my secret',
+//         resave: false,
+//         saveUninitialized: false,
+//         store: store
+//     })
+// );
 app.use(authRoutes);
-app.use((req, res, next) => {
-    User.findById(req.session.userId)
-    .then(user => {
-        req.user = user;
-        next();
-    })
-    .catch(err => {console.log(err)});
-})
+// app.use((req, res, next) => {
+//     User.findById(req.session.userId)
+//     .then(user => {
+//         req.user = user;
+//         next();
+//     })
+//     .catch(err => {console.log(err)});
+// })
 
 
 app.use('/admin', adminRoutes);

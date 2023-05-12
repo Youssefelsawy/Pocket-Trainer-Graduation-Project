@@ -15,8 +15,11 @@ exports.postLogin = async (req, res) => {
       res.status(401).send('Invalid email or password');
       return;
     }
-    req.session.userId = user._id;
-    res.send(user);
+    //req.session.userId = user._id;
+    //res.send(user);
+    const token = jwt.sign({ userId: user._id }, 'secret-key');
+    req.headers.authorization = token;
+    res.json({ token });
   }
 
 exports.getLogin = async (req, res) => {
@@ -61,7 +64,7 @@ exports.signUp = async (req, res) => {
           await user.save();
           
           // Set user id in session
-          req.session.userId = user._id;
+          //req.session.userId = user._id;
     
         res.status(201).json({ message: 'User created' });
       } catch (error) {
@@ -73,13 +76,13 @@ exports.signUp = async (req, res) => {
 
 exports.getProfile = async (req, res) => {
     // Fetch user from database using the user ID in the session
-    const user = await User.findById(req.session.userId);
-    const userData = {
-      name: user.name,
-      email: user.email,
-      photo: user.photo.data.toString('base64'),
-      contentType: user.photo.contentType
-    };
-    res.send(userData);
-    // res.send(`Welcome back, ${user.name}`);
+    // const user = await User.findById(req.session.userId);
+    // const userData = {
+    //   name: user.name,
+    //   email: user.email,
+    //   photo: user.photo.data.toString('base64'),
+    //   contentType: user.photo.contentType
+    // };
+    // res.send(userData);
+     res.send(req.user);
   };
