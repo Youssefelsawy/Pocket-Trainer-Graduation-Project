@@ -16,14 +16,6 @@ exports.postLogin = async (req, res) => {
       return;
     }
     req.session.userId = user._id;
-    const secret = 'your_secret_key';
-    const payload = {
-      userId: user._id,
-      email: user.email
-    };
-    const token = jwt.sign(payload, secret, { expiresIn: '1h' });
-    user.token = token;
-    await user.save();
     res.send(user);
   }
 
