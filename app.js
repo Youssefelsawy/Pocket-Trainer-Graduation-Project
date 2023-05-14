@@ -1,18 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const session = require('express-session');
-const MongoDBStore = require('connect-mongodb-session')(session);
+// const session = require('express-session');
+// const MongoDBStore = require('connect-mongodb-session')(session);
 
 const User = require('./models/user');
 const errorController = require('./controllers/error');
 
 const MONGODB_URI = 'mongodb+srv://youssefelsawy:7WE62UIa4j25Yd31@cluster0.4uq3vsh.mongodb.net/pocketTrainer?retryWrites=true&w=majority'
 const app = express();
-const store = new MongoDBStore({
-    uri: MONGODB_URI,
-    collection: 'sessions'
-});
+// const store = new MongoDBStore({
+//     uri: MONGODB_URI,
+//     collection: 'sessions'
+// });
 
 const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/user');

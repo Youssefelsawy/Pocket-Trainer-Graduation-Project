@@ -18,16 +18,15 @@ exports.postLogin = async (req, res) => {
     //req.session.userId = user._id;
     //res.send(user);
     const token = jwt.sign({ userId: user._id }, 'secret-key');
-    req.headers.authorization = token;
     res.json({ token });
   }
 
 exports.getLogin = async (req, res) => {
   const email = req.params.email;
   const user = await User.findOne({ email });
-  req.session.userId = user._id;
-    console.log(req.session);
-    res.send('Logged in successfully');
+  const token = jwt.sign({ userId: user._id }, 'secret-key');
+  console.log(token);
+  res.send('Logged in successfully');
 }
 
 exports.postLogout = (req, res) => {
