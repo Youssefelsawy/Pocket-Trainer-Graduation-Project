@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
-
 exports.postLogin = async (req, res) => {
     const { email, password } = req.body;
   
@@ -30,9 +29,9 @@ exports.getLogin = async (req, res) => {
 }
 
 exports.postLogout = (req, res) => {
-    req.session.destroy(err => {
-        console.log(err);
-    })
+    // req.session.destroy(err => {
+    //     console.log(err);
+    // })
 }
 
 exports.signUp = async (req, res) => {
