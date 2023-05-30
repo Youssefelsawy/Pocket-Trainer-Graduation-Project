@@ -2,38 +2,30 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const exercise_Schema = new Schema({
-  name: {
+  Title: {
     type: String,
     required: true
   },
-  bodyPart: {
+  BodyPart: {
     type: String,
     required: true
   },
-  target: {
+  Type: {
     type: String,
     required: true
   },
-  description: {
+  Desc: {
     type: String,
     required: true
   },
-  tips: {
-    type: String,
-    required: false
-  },
-  repetition: {
+  Equipment: {
     type: String,
     required: true
   },
-  sets: {
+  Level: {
     type: String,
     required: true
-  },
-  imageUrl: {
-    type: String,
-    required: true
-  },
+  }
 });
 
 module.exports = mongoose.model('Exercise', exercise_Schema);

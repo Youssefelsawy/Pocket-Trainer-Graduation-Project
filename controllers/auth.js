@@ -5,11 +5,8 @@ const jwt = require('jsonwebtoken');
 
 exports.postLogin = async (req, res) => {
     const { email, password } = req.body;
-  
-    // Fetch user from database
     const user = await User.findOne({ email });
-  
-    // Check if user exists and password is correct
+    
     if (!user || !await bcrypt.compare(password, user.password)) {
       res.status(401).send('Invalid email or password');
       return;

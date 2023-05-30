@@ -27,7 +27,7 @@ router.get('/core/exercises', fetchingExerciseSController.getCoreExercises);
 
 router.get('/exercise/:exerciseId', fetchingExerciseSController.getExerciseById);
 
-router.post('/add-exercise-to-wourkoutplan/:exerciseId',isAuth, fetchingExerciseSController.postWorkoutPlan);
+router.post('/add-exercise-to-wourkoutplan',isAuth, fetchingExerciseSController.postWorkoutPlan);
 
 router.get('/workoutplan',isAuth, fetchingExerciseSController.getWorkoutPlan);
 

@@ -23,17 +23,59 @@ const userSchema = new Schema({
         contentType: String
       },
     workoutPlan: {
-        Exercises: [
+        ChestDay: [
             {
                 exerciseId: { type: Schema.Types.ObjectId, ref: 'Exercise', required: true },
-                name: { type: String, required: true },
-                imageUrl: { type: String, required: true },
-                bodyPart: { type: String, required: true },
-                target: { type: String, required: true },
-                description: { type: String, required: true },
-                sets: { type: Number, required: true },
-                repetition: { type: Number, required: true },
-                tips: { type: String, required: false }
+                Title: { type: String, required: true },
+                BodyPart: { type: String, required: true },
+                Type: { type: String, required: true },
+                Desc: { type: String, required: true },
+                Equipment: { type: String, required: true },
+                Level: { type: String, required: true }
+            }
+        ],
+        LegDay: [
+            {
+                exerciseId: { type: Schema.Types.ObjectId, ref: 'Exercise', required: true },
+                Title: { type: String, required: true },
+                BodyPart: { type: String, required: true },
+                Type: { type: String, required: true },
+                Desc: { type: String, required: true },
+                Equipment: { type: String, required: true },
+                Level: { type: String, required: true }
+            }
+        ],
+        ArmDay: [
+            {
+                exerciseId: { type: Schema.Types.ObjectId, ref: 'Exercise', required: true },
+                Title: { type: String, required: true },
+                BodyPart: { type: String, required: true },
+                Type: { type: String, required: true },
+                Desc: { type: String, required: false },
+                Equipment: { type: String, required: true },
+                Level: { type: String, required: true }
+            }
+        ],
+        BackDay: [
+            {
+                exerciseId: { type: Schema.Types.ObjectId, ref: 'Exercise', required: true },
+                Title: { type: String, required: true },
+                BodyPart: { type: String, required: true },
+                Type: { type: String, required: true },
+                Desc: { type: String, required: false },
+                Equipment: { type: String, required: true },
+                Level: { type: String, required: true }
+            }
+        ],
+        ShoulderDay: [
+            {
+                exerciseId: { type: Schema.Types.ObjectId, ref: 'Exercise', required: true },
+                Title: { type: String, required: true },
+                BodyPart: { type: String, required: true },
+                Type: { type: String, required: true },
+                Desc: { type: String, required: false },
+                Equipment: { type: String, required: true },
+                Level: { type: String, required: true }
             }
         ]
     },
@@ -55,34 +97,119 @@ const userSchema = new Schema({
 });
 
 //WorkoutPlan Methods
-userSchema.methods.addToWorkoutPlan = function(exercise) {
-        const exerciseWorkoutIndex = this.workoutPlan.Exercises.findIndex(cp => {
-            return cp.exerciseId.toString() === exercise._id.toString();
-        });
-        const updatedWorkoutPlanExercises= [...this.workoutPlan.Exercises];
-        if(exerciseWorkoutIndex >= 0){
-            console.log('this exercise already added in your workoutPlan');
-            exist = true;
-        }
-        else if (exerciseWorkoutIndex < 0) {
-            updatedWorkoutPlanExercises.push({
-                exerciseId: exercise._id,
-                name: exercise.name,
-                imageUrl: exercise.imageUrl,
-                bodyPart: exercise.bodyPart,
-                target: exercise.target,
-                description: exercise.description,
-                tips: exercise.tips,
-                repetition: exercise.repetition,
-                sets: exercise.sets
-            });
-        }
-        // const updatedWorkoutPlan = {
-        //     Exercises: updatedWorkoutPlanExercises
-        // };
-        this.workoutPlan.Exercises = updatedWorkoutPlanExercises;
-        return this.save();
-};
+// userSchema.methods.addToWorkoutPlan = function(exercise) {
+//         const exerciseWorkoutIndex = this.workoutPlan.Exercises.findIndex(cp => {
+//             return cp.exerciseId.toString() === exercise._id.toString();
+//         });
+//         const updatedWorkoutPlanExercises= [...this.workoutPlan.Exercises];
+//         if(exerciseWorkoutIndex >= 0){
+//             console.log('this exercise already added in your workoutPlan');
+//             exist = true;
+//         }
+//         else if (exerciseWorkoutIndex < 0) {
+//             updatedWorkoutPlanExercises.push({
+//                 exerciseId: exercise._id,
+//                 name: exercise.name,
+//                 imageUrl: exercise.imageUrl,
+//                 bodyPart: exercise.bodyPart,
+//                 target: exercise.target,
+//                 description: exercise.description,
+//                 tips: exercise.tips,
+//                 repetition: exercise.repetition,
+//                 sets: exercise.sets
+//             });
+//         }
+//         // const updatedWorkoutPlan = {
+//         //     Exercises: updatedWorkoutPlanExercises
+//         // };
+//         this.workoutPlan.Exercises = updatedWorkoutPlanExercises;
+//         return this.save();
+// };
+
+userSchema.methods.addChestExercisesToWorkoutPlan = function(exercises) {
+    const ChestExercises = []
+    for( let exercise of exercises ){
+        ChestExercises.push({
+            exerciseId: exercise._id,
+            Title: exercise.Title,
+            BodyPart: exercise.BodyPart,
+            Type: exercise.Type,
+            Desc: exercise.Desc,
+            Equipment: exercise.Equipment,
+            Level: exercise.Level
+        })
+    }
+    this.workoutPlan.ChestDay = ChestExercises
+    return this.save();
+}
+
+userSchema.methods.addLegExercisesToWorkoutPlan = function(exercises) {
+    const LegExercises = []
+    for( let exercise of exercises ){
+        LegExercises.push({
+            exerciseId: exercise._id,
+            Title: exercise.Title,
+            BodyPart: exercise.BodyPart,
+            Type: exercise.Type,
+            Desc: exercise.Desc,
+            Equipment: exercise.Equipment,
+            Level: exercise.Level
+        })
+    }
+    this.workoutPlan.LegDay = LegExercises
+    return this.save();
+}
+
+userSchema.methods.addArmExercisesToWorkoutPlan = function(exercises) {
+    const ArmExercises = []
+    for( let exercise of exercises ){
+        ArmExercises.push({
+            exerciseId: exercise._id,
+            Title: exercise.Title,
+            BodyPart: exercise.BodyPart,
+            Type: exercise.Type,
+            Desc: exercise.Desc,
+            Equipment: exercise.Equipment,
+            Level: exercise.Level
+        })
+    }
+    this.workoutPlan.ArmDay = ArmExercises
+    return this.save();
+}
+
+userSchema.methods.addBackExercisesToWorkoutPlan = function(exercises) {
+    const BackExercises = []
+    for( let exercise of exercises ){
+        BackExercises.push({
+            exerciseId: exercise._id,
+            Title: exercise.Title,
+            BodyPart: exercise.BodyPart,
+            Type: exercise.Type,
+            Desc: exercise.Desc,
+            Equipment: exercise.Equipment,
+            Level: exercise.Level
+        })
+    }
+    this.workoutPlan.BackDay = BackExercises
+    return this.save();
+}
+
+userSchema.methods.addShoulderExercisesToWorkoutPlan = function(exercises) {
+    const ShoulderExercises = []
+    for( let exercise of exercises ){
+        ShoulderExercises.push({
+            exerciseId: exercise._id,
+            Title: exercise.Title,
+            BodyPart: exercise.BodyPart,
+            Type: exercise.Type,
+            Desc: exercise.Desc,
+            Equipment: exercise.Equipment,
+            Level: exercise.Level
+        })
+    }
+    this.workoutPlan.ShoulderDay = ShoulderExercises
+    return this.save();
+}
 
 userSchema.methods.removeFromWorkoutPlan = function (exeId) {
     const updatedWorkoutPlanExercises = this.workoutPlan.Exercises.filter(exercise => {
