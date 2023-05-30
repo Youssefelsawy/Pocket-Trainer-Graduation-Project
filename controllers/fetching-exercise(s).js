@@ -81,9 +81,9 @@ exports.getWorkoutPlan = (req, res, next) => {
 };
 
 exports.postWorkoutPlan = (req, res, next) => {
-  let Training_Location = "gym"
-  let goal = "cut"
-  let level = "Intermediate"
+  let Training_Location = req.body.training_location
+  let goal = req.body.goal
+  let level = req.body.level
 
   if (Training_Location == "home" && goal == "bulk") { // Completed
     Exercise.aggregate([
