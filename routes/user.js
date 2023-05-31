@@ -6,6 +6,8 @@ const fetchingMealSController = require('../controllers/fetching-meal(s)');
 
 const fetchingStretcheSController = require('../controllers/fetching-stretch(s)');
 
+const postWorkoutPlan = require('../controllers/Workout-RecommendationSystem');
+
 const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
@@ -13,9 +15,7 @@ const router = express.Router();
 //Exercise Routes
 router.get('/chest/exercises', fetchingExerciseSController.getChestExercises);
 
-router.get('/biceps/exercises', fetchingExerciseSController.getBicepsExercises);
-
-router.get('/triceps/exercises', fetchingExerciseSController.getTricepsExercises);
+router.get('/arm/exercises', fetchingExerciseSController.getArmExercises);
 
 router.get('/leg/exercises', fetchingExerciseSController.getLegExercises);
 
@@ -23,11 +23,9 @@ router.get('/back/exercises', fetchingExerciseSController.getBackExercises);
 
 router.get('/shoulder/exercises', fetchingExerciseSController.getShoulderExercises);
 
-router.get('/core/exercises', fetchingExerciseSController.getCoreExercises);
+router.get('/abdominals/exercises', fetchingExerciseSController.getAbdominalsExercises);
 
-router.get('/exercise/:exerciseId', fetchingExerciseSController.getExerciseById);
-
-router.post('/wourkoutplan-recommendation',isAuth, fetchingExerciseSController.postWorkoutPlan);
+router.post('/wourkoutplan-recommendation',isAuth, postWorkoutPlan);
 
 router.get('/workoutplan',isAuth, fetchingExerciseSController.getWorkoutPlan);
 
