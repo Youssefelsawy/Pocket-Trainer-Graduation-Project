@@ -33,15 +33,15 @@ router.post('/wourkoutplan-recommendation',isAuth, postWorkoutPlan);
 
 router.get('/workoutplan',isAuth, fetchingExerciseSController.getWorkoutPlan);
 
-router.post('/wourkoutplan-delete-chest-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteChestExercise);
+router.delete('/wourkoutplan-delete-chest-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteChestExercise);
 
-router.post('/wourkoutplan-delete-back-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteBackExercise)
+router.delete('/wourkoutplan-delete-back-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteBackExercise)
 
-router.post('/wourkoutplan-delete-leg-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteLegExercise)
+router.delete('/wourkoutplan-delete-leg-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteLegExercise)
 
-router.post('/wourkoutplan-delete-arm-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteArmExercise)
+router.delete('/wourkoutplan-delete-arm-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteArmExercise)
 
-router.post('/wourkoutplan-delete-shoulder-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteShoulderExercise)
+router.delete('/wourkoutplan-delete-shoulder-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteShoulderExercise)
 
 
 //Meals Routes
