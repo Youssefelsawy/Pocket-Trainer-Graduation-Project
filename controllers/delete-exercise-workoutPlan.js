@@ -1,5 +1,5 @@
 exports.deleteChestExercise = (req, res, next) => {
-    const exeId = req.params.exerciseId;
+    const exeId = req.body.exerciseId;
     req.user
     .removeChestFromWorkoutPlan(exeId)
     .then(result => {
@@ -10,7 +10,7 @@ exports.deleteChestExercise = (req, res, next) => {
   
   
   exports.deleteBackExercise = (req, res, next) => {
-    const exeId = req.params.exerciseId;
+    const exeId = req.body.exerciseId;
     req.user
     .removeBackFromWorkoutPlan(exeId)
     .then(result => {
@@ -20,7 +20,7 @@ exports.deleteChestExercise = (req, res, next) => {
   };
 
   exports.deleteLegExercise = (req, res, next) => {
-    const exeId = req.params.exerciseId;
+    const exeId = req.body.exerciseId;
     req.user
     .removeLegFromWorkoutPlan(exeId)
     .then(result => {
@@ -30,7 +30,7 @@ exports.deleteChestExercise = (req, res, next) => {
   };
 
   exports.deleteArmExercise = (req, res, next) => {
-    const exeId = req.params.exerciseId;
+    const exeId = req.body.exerciseId;
     req.user
     .removeArmFromWorkoutPlan(exeId)
     .then(result => {
@@ -40,7 +40,7 @@ exports.deleteChestExercise = (req, res, next) => {
   };
 
   exports.deleteShoulderExercise = (req, res, next) => {
-    const exeId = req.params.exerciseId;
+    const exeId = req.body.exerciseId;
     req.user
     .removeShoulderFromWorkoutPlan(exeId)
     .then(result => {
