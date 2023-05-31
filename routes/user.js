@@ -6,7 +6,7 @@ const fetchingMealSController = require('../controllers/fetching-meal(s)');
 
 const fetchingStretcheSController = require('../controllers/fetching-stretch(s)');
 
-const postWorkoutPlan = require('../controllers/Workout-RecommendationSystem');
+const postWorkoutPlan = require('../controllers/WorkoutPlan-RecommendationSystem');
 
 const isAuth = require('../middleware/is-auth');
 
@@ -30,6 +30,8 @@ router.post('/wourkoutplan-recommendation',isAuth, postWorkoutPlan);
 router.get('/workoutplan',isAuth, fetchingExerciseSController.getWorkoutPlan);
 
 router.post('/wourkoutplan-delete-chest-exercise/:exerciseId',isAuth, fetchingExerciseSController.postWorkoutDeleteChestExercise);
+
+router.post('/wourkoutplan-delete-back-exercise/:exerciseId',isAuth, fetchingExerciseSController.postWorkoutDeleteBackExercise)
 
 
 //Meals Routes

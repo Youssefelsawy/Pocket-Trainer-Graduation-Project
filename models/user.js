@@ -220,6 +220,15 @@ userSchema.methods.removeChestFromWorkoutPlan = function (exeId) {
 };
 
 
+userSchema.methods.removeBackFromWorkoutPlan = function (exeId) {
+    const updatedBackDayWorkoutPlan = this.workoutPlan.BackDay.filter(exercise => {
+        return exercise.exerciseId.toString() !== exeId.toString();
+    });
+    this.workoutPlan.BackDay = updatedBackDayWorkoutPlan;
+    return this.save();
+};
+
+
 
 
 //NutritionPlan Methods
