@@ -8,7 +8,7 @@ const fetchingStretcheSController = require('../controllers/fetching-stretch(s)'
 
 const postWorkoutPlan = require('../controllers/WorkoutPlan-RecommendationSystem');
 
-const deleteExerciseFromWorkoutPlan = require('../controllers/delete-exercise-workoutPlan');
+const deleteExerciseFromWorkoutPlan = require('../controllers/delete-exercise-workoutplan');
 
 const isAuth = require('../middleware/is-auth');
 
