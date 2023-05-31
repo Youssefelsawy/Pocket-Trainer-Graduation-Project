@@ -79,10 +79,10 @@ exports.getWorkoutPlan = (req, res, next) => {
 // });
 // exist = false;
 
-exports.postWorkoutDeleteExercise = (req, res, next) => {
+exports.postWorkoutDeleteChestExercise = (req, res, next) => {
   const exeId = req.params.exerciseId;
   req.user
-  .removeFromWorkoutPlan(exeId)
+  .removeChestFromWorkoutPlan(exeId)
   .then(result => {
     res.send(result);
   })

@@ -211,11 +211,11 @@ userSchema.methods.addShoulderExercisesToWorkoutPlan = function(exercises) {
     return this.save();
 }
 
-userSchema.methods.removeFromWorkoutPlan = function (exeId) {
-    const updatedWorkoutPlanExercises = this.workoutPlan.Exercises.filter(exercise => {
+userSchema.methods.removeChestFromWorkoutPlan = function (exeId) {
+    const updatedChestDayWorkoutPlan = this.workoutPlan.ChestDay.filter(exercise => {
         return exercise.exerciseId.toString() !== exeId.toString();
     });
-    this.workoutPlan.Exercises = updatedWorkoutPlanExercises;
+    this.workoutPlan.ChestDay = updatedChestDayWorkoutPlan;
     return this.save();
 };
 

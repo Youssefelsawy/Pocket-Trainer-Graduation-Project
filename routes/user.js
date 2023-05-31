@@ -29,7 +29,7 @@ router.post('/wourkoutplan-recommendation',isAuth, postWorkoutPlan);
 
 router.get('/workoutplan',isAuth, fetchingExerciseSController.getWorkoutPlan);
 
-router.post('/wourkoutplan-delete-exercise/:exerciseId',isAuth, fetchingExerciseSController.postWorkoutDeleteExercise);
+router.post('/wourkoutplan-delete-chest-exercise/:exerciseId',isAuth, fetchingExerciseSController.postWorkoutDeleteChestExercise);
 
 
 //Meals Routes
