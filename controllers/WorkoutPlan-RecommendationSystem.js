@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
     let goal = req.body.goal
     let level = req.body.level
   
-    if (Training_Location == "home" && goal == "bulk") { // Completed
+    if (Training_Location == "Home" && goal == "Bulk") { // Completed
       Exercise.aggregate([
         { $facet: {
             chest: [
@@ -166,7 +166,7 @@ module.exports = (req, res, next) => {
     
   
   
-    else if(Training_Location == "gym" && goal == "bulk") { // Completed
+    else if(Training_Location == "Gym" && goal == "Bulk") { // Completed
       Exercise.aggregate([
         { $facet: {
             chest: [
@@ -328,7 +328,7 @@ module.exports = (req, res, next) => {
     
   
   
-    else if(Training_Location == "home" && goal == "cardio") { // Completed
+    else if(Training_Location == "Home" && goal == "Cardio") { // Completed
       Exercise.aggregate([
         { $facet: {
             chest: [
@@ -488,7 +488,7 @@ module.exports = (req, res, next) => {
     
   
   
-    else if(Training_Location == "gym" && goal == "cardio") { // Completed
+    else if(Training_Location == "Gym" && goal == "Cardio") { // Completed
       Exercise.aggregate([
         { $facet: {
             chest: [
@@ -628,7 +628,7 @@ module.exports = (req, res, next) => {
     
   
   
-    else if(Training_Location == "home" && goal == "cut") { // Completed
+    else if(Training_Location == "Home" && goal == "Cut") { // Completed
       Exercise.aggregate([
         { $facet: {
             chest: [
@@ -804,7 +804,7 @@ module.exports = (req, res, next) => {
     
     
   
-    else if(Training_Location == "gym" && goal == "cut") { // Completed
+    else if(Training_Location == "Gym" && goal == "Cut") { // Completed
       Exercise.aggregate([
         {
           $facet: {

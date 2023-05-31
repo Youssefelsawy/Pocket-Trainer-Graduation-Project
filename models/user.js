@@ -126,6 +126,9 @@ const userSchema = new Schema({
 //         return this.save();
 // };
 
+
+//WorkoutPlan Methods
+
 userSchema.methods.addChestExercisesToWorkoutPlan = function(exercises) {
     const ChestExercises = []
     for( let exercise of exercises ){
@@ -211,6 +214,8 @@ userSchema.methods.addShoulderExercisesToWorkoutPlan = function(exercises) {
     return this.save();
 }
 
+
+// removing chest exercise from workout plan
 userSchema.methods.removeChestFromWorkoutPlan = function (exeId) {
     const updatedChestDayWorkoutPlan = this.workoutPlan.ChestDay.filter(exercise => {
         return exercise.exerciseId.toString() !== exeId.toString();
@@ -220,11 +225,42 @@ userSchema.methods.removeChestFromWorkoutPlan = function (exeId) {
 };
 
 
+// removing back exercise from workout plan
 userSchema.methods.removeBackFromWorkoutPlan = function (exeId) {
     const updatedBackDayWorkoutPlan = this.workoutPlan.BackDay.filter(exercise => {
         return exercise.exerciseId.toString() !== exeId.toString();
     });
     this.workoutPlan.BackDay = updatedBackDayWorkoutPlan;
+    return this.save();
+};
+
+
+// removing leg exercise from workout plan
+userSchema.methods.removeLegFromWorkoutPlan = function (exeId) {
+    const updatedLegDayWorkoutPlan = this.workoutPlan.LegDay.filter(exercise => {
+        return exercise.exerciseId.toString() !== exeId.toString();
+    });
+    this.workoutPlan.LegDay = updatedLegDayWorkoutPlan;
+    return this.save();
+};
+
+
+// removing arm exercise from workout plan
+userSchema.methods.removeArmFromWorkoutPlan = function (exeId) {
+    const updatedArmDayWorkoutPlan = this.workoutPlan.ArmDay.filter(exercise => {
+        return exercise.exerciseId.toString() !== exeId.toString();
+    });
+    this.workoutPlan.ArmDay = updatedArmDayWorkoutPlan;
+    return this.save();
+};
+
+
+// removing shoulder exercise from workout plan
+userSchema.methods.removeShoulderFromWorkoutPlan = function (exeId) {
+    const updatedShoulderDayWorkoutPlan = this.workoutPlan.ShoulderDay.filter(exercise => {
+        return exercise.exerciseId.toString() !== exeId.toString();
+    });
+    this.workoutPlan.ShoulderDay = updatedShoulderDayWorkoutPlan;
     return this.save();
 };
 
