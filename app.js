@@ -19,9 +19,9 @@ const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/user');
 const authRoutes = require('./routes/auth')
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
 // Add a middleware to set the Access-Control-Allow-Origin header to '*'
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -48,6 +48,12 @@ app.use(authRoutes);
 
 app.use('/admin', adminRoutes);
 app.use(userRoutes);
+
+app.use((error, req, res, next) => {
+    console.error(error); // Log the error for debugging purposes
+    res.status(500).json({ error: 'Internal server error' });
+  });
+  
 
 app.use(errorController.get404);
 
