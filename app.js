@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 // const session = require('express-session');
 // const MongoDBStore = require('connect-mongodb-session')(session);
+const cors = require('cors')
 
 const User = require('./models/user');
 const errorController = require('./controllers/error');
@@ -20,6 +21,12 @@ const authRoutes = require('./routes/auth')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
+// Add a middleware to set the Access-Control-Allow-Origin header to '*'
+router.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+  });
 // app.use(
 //     session({
 //         secret: 'my secret',
