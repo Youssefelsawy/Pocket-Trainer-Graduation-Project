@@ -67,9 +67,7 @@ router.get('/nutritionplan/dinner', isAuth, fetchingMealSController.getDinnerInN
 //Stretch Routes
 router.get('/chest/stretches', fetchingStretcheSController.getChestStretches);
 
-router.get('/biceps/stretches', fetchingStretcheSController.getBicepsStretches);
-
-router.get('/triceps/stretches', fetchingStretcheSController.getTricepsStretches);
+router.get('/arm/stretches', fetchingStretcheSController.getArmStretches);
 
 router.get('/back/stretches', fetchingStretcheSController.getBackStretches);
 
@@ -77,7 +75,7 @@ router.get('/leg/stretches', fetchingStretcheSController.getLegStretches);
 
 router.get('/shoulder/stretches', fetchingStretcheSController.getShloulderStretches);
 
-router.get('/stretch/:stretchId', fetchingStretcheSController.getStretchById);
+router.get('/abdominals/stretches', fetchingStretcheSController.getAbdominalsExercises);
 
 
 module.exports = router;

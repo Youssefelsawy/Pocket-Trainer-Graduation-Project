@@ -1,31 +1,24 @@
-const Stretch = require('../models/stretch');
+const Exercise = require('../models/exercise');
 
 exports.getChestStretches = (req, res, next) => {
-    Stretch.find({'bodyPart': 'chest'})
+  Exercise.find({'Type': 'Stretching', "BodyPart": "Chest"})
     .then(stretches => {
       res.send(stretches);
     })
     .catch(err => console.log(err));
   };
  
-  exports.getBicepsStretches = (req, res, next) => {
-    Stretch.find({'bodyPart': 'biceps'})
+  exports.getArmStretches = (req, res, next) => {
+    Exercise.find({'Type': 'Stretching', "BodyPart": {$in: ["Triceps", 'Biceps', 'Forearms']}})
     .then(stretches => {
       res.send(stretches);
     })
     .catch(err => console.log(err));
   };
 
-  exports.getTricepsStretches = (req, res, next) => {
-    Stretch.find({'bodyPart': 'triceps'})
-    .then(stretches => {
-      res.send(stretches);
-    })
-    .catch(err => console.log(err));
-  };
 
   exports.getBackStretches = (req, res, next) => {
-    Stretch.find({'bodyPart': 'back'})
+    Exercise.find({'Type': 'Stretching', 'BodyPart': {$in: ['Lats', 'Lower Back', 'Middle Back']} })
     .then(stretches => {
       res.send(stretches);
     })
@@ -33,7 +26,7 @@ exports.getChestStretches = (req, res, next) => {
   };
 
   exports.getLegStretches = (req, res, next) => {
-    Stretch.find({'bodyPart': 'leg'})
+    Exercise.find({'BodyPart': {$in: ['Adductors', 'Calves', 'Glutes', 'Hamstrings', 'Quadriceps']} })
     .then(stretches => {
       res.send(stretches);
     })
@@ -41,18 +34,18 @@ exports.getChestStretches = (req, res, next) => {
   };
 
   exports.getShloulderStretches = (req, res, next) => {
-    Stretch.find({'bodyPart': 'shoulder'})
+    Exercise.find({'Type': 'Stretching', 'BodyPart': {$in: ['Shoulder', 'Neck', 'Traps']} })
     .then(stretches => {
       res.send(stretches);
     })
     .catch(err => console.log(err));
   };
 
-  exports.getStretchById = (req, res, next) => {
-    const stretchId = req.params.stretchId;
-    Stretch.findById(stretchId) 
-    .then(stretch => {
-      res.send(stretch);
+  exports.getAbdominalsExercises = (req, res, next) => {
+    Exercise.find({'Type': 'Stretching', 'BodyPart': 'Abdominals'})
+    
+    .then(stretches => {
+      res.send(stretches);
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
   };
