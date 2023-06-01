@@ -214,55 +214,36 @@ userSchema.methods.addShoulderExercisesToWorkoutPlan = function(exercises) {
     return this.save();
 }
 
-
-// removing chest exercise from workout plan
-userSchema.methods.removeChestFromWorkoutPlan = function (exeId) {
+// removing exercise whatever it is from user workoutplan
+userSchema.methods.removeExerciseFromWorkoutPlan = function (exerciseId) {
     const updatedChestDayWorkoutPlan = this.workoutPlan.ChestDay.filter(exercise => {
-        return exercise.exerciseId.toString() !== exeId.toString();
+      return exercise.exerciseId.toString() !== exerciseId.toString();
     });
     this.workoutPlan.ChestDay = updatedChestDayWorkoutPlan;
-    return this.save();
-};
-
-
-// removing back exercise from workout plan
-userSchema.methods.removeBackFromWorkoutPlan = function (exeId) {
+  
     const updatedBackDayWorkoutPlan = this.workoutPlan.BackDay.filter(exercise => {
-        return exercise.exerciseId.toString() !== exeId.toString();
+      return exercise.exerciseId.toString() !== exerciseId.toString();
     });
     this.workoutPlan.BackDay = updatedBackDayWorkoutPlan;
-    return this.save();
-};
-
-
-// removing leg exercise from workout plan
-userSchema.methods.removeLegFromWorkoutPlan = function (exeId) {
+  
     const updatedLegDayWorkoutPlan = this.workoutPlan.LegDay.filter(exercise => {
-        return exercise.exerciseId.toString() !== exeId.toString();
+      return exercise.exerciseId.toString() !== exerciseId.toString();
     });
     this.workoutPlan.LegDay = updatedLegDayWorkoutPlan;
-    return this.save();
-};
-
-
-// removing arm exercise from workout plan
-userSchema.methods.removeArmFromWorkoutPlan = function (exeId) {
+  
     const updatedArmDayWorkoutPlan = this.workoutPlan.ArmDay.filter(exercise => {
-        return exercise.exerciseId.toString() !== exeId.toString();
+      return exercise.exerciseId.toString() !== exerciseId.toString();
     });
     this.workoutPlan.ArmDay = updatedArmDayWorkoutPlan;
-    return this.save();
-};
-
-
-// removing shoulder exercise from workout plan
-userSchema.methods.removeShoulderFromWorkoutPlan = function (exeId) {
+  
     const updatedShoulderDayWorkoutPlan = this.workoutPlan.ShoulderDay.filter(exercise => {
-        return exercise.exerciseId.toString() !== exeId.toString();
+      return exercise.exerciseId.toString() !== exerciseId.toString();
     });
     this.workoutPlan.ShoulderDay = updatedShoulderDayWorkoutPlan;
+  
     return this.save();
-};
+  };
+  
 
 
 

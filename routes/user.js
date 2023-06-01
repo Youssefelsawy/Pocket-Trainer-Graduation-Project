@@ -33,15 +33,8 @@ router.post('/wourkoutplan-recommendation',isAuth, postWorkoutPlan);
 
 router.get('/workoutplan',isAuth, fetchingExerciseSController.getWorkoutPlan);
 
-router.delete('/wourkoutplan-delete-chest-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteChestExercise);
+router.delete('/wourkoutplan-delete-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteExercise);
 
-router.delete('/wourkoutplan-delete-back-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteBackExercise)
-
-router.delete('/wourkoutplan-delete-leg-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteLegExercise)
-
-router.delete('/wourkoutplan-delete-arm-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteArmExercise)
-
-router.delete('/wourkoutplan-delete-shoulder-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteShoulderExercise)
 
 
 //Meals Routes
