@@ -12,5 +12,9 @@ const exeId = req.body.exerciseId
             res.send(result)
         }
     })
+    .catch(err => {
+        console.log(err);
+        res.status(400).send("Exercise you provide does not exist")
+      });
     exist = false;
 };
