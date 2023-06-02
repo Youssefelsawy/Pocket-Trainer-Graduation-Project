@@ -10,7 +10,7 @@ const postWorkoutPlan = require('../controllers/WorkoutPlan-RecommendationSystem
 
 const deleteExerciseFromWorkoutPlan = require('../controllers/delete-exercise-workoutPlan');
 
-const aaddingExerciseToWorkoutPlan = require('../controllers/adding-exercise-workoutPlan');
+//const aaddingExerciseToWorkoutPlan = require('../controllers/adding-exercise-workoutPlan');
 
 const isAuth = require('../middleware/is-auth');
 
