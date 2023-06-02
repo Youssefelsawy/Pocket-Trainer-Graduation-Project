@@ -37,6 +37,8 @@ router.delete('/wourkoutplan-delete-exercise',isAuth, deleteExerciseFromWorkoutP
 
 router.post('/workoutplan/add/chest/exercise', isAuth, addingExerciseToWorkoutPlan.addChestExercise)
 
+router.post('/workoutplan/add/back/exercise', isAuth, addingExerciseToWorkoutPlan.addBackExercise)
+
 
 
 //Meals Routes

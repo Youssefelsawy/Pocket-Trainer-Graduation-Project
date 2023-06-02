@@ -125,6 +125,30 @@ userSchema.methods.addToChestDay = function(exercise) {
         return this.save();
 };
 
+userSchema.methods.addToBackDay = function(exercise) {
+    const exerciseWorkoutIndex = this.workoutPlan.BackDay.findIndex(cp => {
+        return cp.exerciseId.toString() === exercise._id.toString();
+    });
+    const updatedBackDay= [...this.workoutPlan.BackDay];
+    if(exerciseWorkoutIndex >= 0){
+        console.log('this exercise already added in your workoutPlan');
+        exist = true;
+    }
+    else if (exerciseWorkoutIndex < 0) {
+        updatedBackDay.push({
+            exerciseId: exercise._id,
+            Title: exercise.Title,
+            BodyPart: exercise.BodyPart,
+            Type: exercise.Type,
+            Desc: exercise.Desc,
+            Equipment: exercise.Equipment,
+            Level: exercise.Level
+        });
+    }
+    this.workoutPlan.BackDay = updatedBackDay;
+    return this.save();
+};
+
 
 //WorkoutPlan Methods
 //create workoutplan with recommendation exercises
