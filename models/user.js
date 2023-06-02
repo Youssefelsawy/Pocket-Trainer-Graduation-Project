@@ -214,7 +214,8 @@ userSchema.methods.addShoulderExercisesToWorkoutPlan = function(exercises) {
     return this.save();
 }
 
-// removing exercise whatever it is from user workoutplan
+
+// removing exercise whatever he exist in workoutplan
 userSchema.methods.removeExerciseFromWorkoutPlan = function (exerciseId) {
     const updatedChestDayWorkoutPlan = this.workoutPlan.ChestDay.filter(exercise => {
       return exercise.exerciseId.toString() !== exerciseId.toString();
@@ -244,7 +245,6 @@ userSchema.methods.removeExerciseFromWorkoutPlan = function (exerciseId) {
     return this.save();
   };
   
-
 
 
 
