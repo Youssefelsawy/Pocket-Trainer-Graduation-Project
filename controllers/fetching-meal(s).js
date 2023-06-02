@@ -11,7 +11,7 @@ exports.getBreakfastMeals = (req, res, next) => {
   exports.getLunchMeals = (req, res, next) => {
     Meal.find({'typeofMeal': 'lunch'})
     .then(meals => {
-      res.send(meals);
+      res.status(200).send(meals);
     })
     .catch(err => console.log(err));
   };
