@@ -149,6 +149,78 @@ userSchema.methods.addToBackDay = function(exercise) {
     return this.save();
 };
 
+userSchema.methods.addToArmDay = function(exercise) {
+    const exerciseWorkoutIndex = this.workoutPlan.ArmDay.findIndex(cp => {
+        return cp.exerciseId.toString() === exercise._id.toString();
+    });
+    const updatedArmDay= [...this.workoutPlan.ArmDay];
+    if(exerciseWorkoutIndex >= 0){
+        console.log('this exercise already added in your workoutPlan');
+        exist = true;
+    }
+    else if (exerciseWorkoutIndex < 0) {
+        updatedArmDay.push({
+            exerciseId: exercise._id,
+            Title: exercise.Title,
+            BodyPart: exercise.BodyPart,
+            Type: exercise.Type,
+            Desc: exercise.Desc,
+            Equipment: exercise.Equipment,
+            Level: exercise.Level
+        });
+    }
+    this.workoutPlan.ArmDay = updatedArmDay;
+    return this.save();
+};
+
+userSchema.methods.addToLegDay = function(exercise) {
+    const exerciseWorkoutIndex = this.workoutPlan.LegDay.findIndex(cp => {
+        return cp.exerciseId.toString() === exercise._id.toString();
+    });
+    const updatedLegDay= [...this.workoutPlan.LegDay];
+    if(exerciseWorkoutIndex >= 0){
+        console.log('this exercise already added in your workoutPlan');
+        exist = true;
+    }
+    else if (exerciseWorkoutIndex < 0) {
+        updatedLegDay.push({
+            exerciseId: exercise._id,
+            Title: exercise.Title,
+            BodyPart: exercise.BodyPart,
+            Type: exercise.Type,
+            Desc: exercise.Desc,
+            Equipment: exercise.Equipment,
+            Level: exercise.Level
+        });
+    }
+    this.workoutPlan.LegDay = updatedLegDay;
+    return this.save();
+};
+
+userSchema.methods.addToShoulderDay = function(exercise) {
+    const exerciseWorkoutIndex = this.workoutPlan.ShoulderDay.findIndex(cp => {
+        return cp.exerciseId.toString() === exercise._id.toString();
+    });
+    const updatedShoulderDay= [...this.workoutPlan.ShoulderDay];
+    if(exerciseWorkoutIndex >= 0){
+        console.log('this exercise already added in your workoutPlan');
+        exist = true;
+    }
+    else if (exerciseWorkoutIndex < 0) {
+        updatedShoulderDay.push({
+            exerciseId: exercise._id,
+            Title: exercise.Title,
+            BodyPart: exercise.BodyPart,
+            Type: exercise.Type,
+            Desc: exercise.Desc,
+            Equipment: exercise.Equipment,
+            Level: exercise.Level
+        });
+    }
+    this.workoutPlan.ShoulderDay = updatedShoulderDay;
+    return this.save();
+};
+
 
 //WorkoutPlan Methods
 //create workoutplan with recommendation exercises

@@ -33,11 +33,17 @@ router.post('/wourkoutplan-recommendation',isAuth, postWorkoutPlan);
 
 router.get('/workoutplan',isAuth, fetchingExerciseSController.getWorkoutPlan);
 
-router.delete('/wourkoutplan-delete-exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteExercise);
+router.delete('/wourkoutplan/delete/exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteExercise);
 
 router.post('/workoutplan/add/chest/exercise', isAuth, addingExerciseToWorkoutPlan.addChestExercise)
 
 router.post('/workoutplan/add/back/exercise', isAuth, addingExerciseToWorkoutPlan.addBackExercise)
+
+router.post('/workoutplan/add/arm/exercise', isAuth, addingExerciseToWorkoutPlan.addArmExercise)
+
+router.post('/workoutplan/add/leg/exercise', isAuth, addingExerciseToWorkoutPlan.addLegExercise)
+
+router.post('/workoutplan/add/shoulder/exercise', isAuth, addingExerciseToWorkoutPlan.addShoulderExercise)
 
 
 
