@@ -59,7 +59,7 @@ app.use(errorController.get404);
 
 mongoose.connect(MONGODB_URI)
 .then(result => {
-    app.listen(443);
+    app.listen(8080);
     console.log('connected!');
 })
 .catch(err => {
