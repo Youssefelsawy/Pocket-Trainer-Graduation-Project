@@ -37,7 +37,7 @@ router.get('/workoutplan',isAuth, fetchingExerciseSController.getWorkoutPlan);
 
 router.delete('/wourkoutplan/delete/exercise',isAuth, deleteExerciseFromWorkoutPlan.deleteExercise);
 
-router.post('/workoutplan/add/chest/exercise', isAuth, addingExerciseToWorkoutPlan.addChestExercise)
+router.post('/workoutplan/add/chest/exercise/:exerciseId', isAuth, addingExerciseToWorkoutPlan.addChestExercise)
 
 router.post('/workoutplan/add/back/exercise', isAuth, addingExerciseToWorkoutPlan.addBackExercise)
 
