@@ -2,6 +2,7 @@ const Exercise = require('../models/exercise')
 
 exports.addChestExercise = (req, res, next) => {
 const exeId = req.body.exerciseId
+console.log(exeId)
     Exercise.findById(exeId)
     .then(exercise => {
         return req.user.addToChestDay(exercise)
