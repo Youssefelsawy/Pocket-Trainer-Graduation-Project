@@ -39,13 +39,13 @@ router.delete('/wourkoutplan/delete/exercise',isAuth, deleteExerciseFromWorkoutP
 
 router.post('/workoutplan/add/chest/exercise/:exerciseId', isAuth, addingExerciseToWorkoutPlan.addChestExercise)
 
-router.post('/workoutplan/add/back/exercise', isAuth, addingExerciseToWorkoutPlan.addBackExercise)
+router.post('/workoutplan/add/back/exercise/:exerciseId', isAuth, addingExerciseToWorkoutPlan.addBackExercise)
 
-router.post('/workoutplan/add/arm/exercise', isAuth, addingExerciseToWorkoutPlan.addArmExercise)
+router.post('/workoutplan/add/arm/exercise/:exerciseId', isAuth, addingExerciseToWorkoutPlan.addArmExercise)
 
-router.post('/workoutplan/add/leg/exercise', isAuth, addingExerciseToWorkoutPlan.addLegExercise)
+router.post('/workoutplan/add/leg/exercise/:exerciseId', isAuth, addingExerciseToWorkoutPlan.addLegExercise)
 
-router.post('/workoutplan/add/shoulder/exercise', isAuth, addingExerciseToWorkoutPlan.addShoulderExercise)
+router.post('/workoutplan/add/shoulder/exercise/:exerciseId', isAuth, addingExerciseToWorkoutPlan.addShoulderExercise)
 
 
 
