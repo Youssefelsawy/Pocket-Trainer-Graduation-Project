@@ -65,6 +65,18 @@ exports.getWorkoutPlan = (req, res, next) => {
 };
 
 
+exports.gerExerciseById = (req, res, next) => {
+  const exeId = req.body.exerciseId;
+  Exercise.findById(exeId)
+  
+  .then(exercise => {
+    res.send(exercise);
+  })
+  .catch(err => console.log(err));
+};
+
+
+
 // const exerciseId = req.params.exerciseId;
 // Exercise.findById(exerciseId)
 // .then(exercise => {

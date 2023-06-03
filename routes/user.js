@@ -17,6 +17,8 @@ const isAuth = require('../middleware/is-auth');
 const router = express.Router();
 
 //Exercise Routes
+router.get('/exercise/ById', fetchingExerciseSController.gerExerciseById);
+
 router.get('/chest/exercises', fetchingExerciseSController.getChestExercises);
 
 router.get('/arm/exercises', fetchingExerciseSController.getArmExercises);
