@@ -25,6 +25,18 @@ const exercise_Schema = new Schema({
   Level: {
     type: String,
     required: true
+  },
+  imageUrl: {
+    type: String,
+    required: true
+  },
+  Sets: {
+    type: String,
+    required: true
+  },
+  Reps: {
+    type: String,
+    required: true
   }
 });
 

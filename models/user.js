@@ -31,7 +31,10 @@ const userSchema = new Schema({
                 Type: { type: String, required: true },
                 Desc: { type: String, required: true },
                 Equipment: { type: String, required: true },
-                Level: { type: String, required: true }
+                Level: { type: String, required: true },
+                imageUrl: { type: String, required: true },
+                Sets: { type: String, required: true },
+                Reps: { type: String, required: true }
             }
         ],
         LegDay: [
@@ -42,7 +45,10 @@ const userSchema = new Schema({
                 Type: { type: String, required: true },
                 Desc: { type: String, required: true },
                 Equipment: { type: String, required: true },
-                Level: { type: String, required: true }
+                Level: { type: String, required: true },
+                imageUrl: { type: String, required: true },
+                Sets: { type: String, required: true },
+                Reps: { type: String, required: true }
             }
         ],
         ArmDay: [
@@ -53,7 +59,10 @@ const userSchema = new Schema({
                 Type: { type: String, required: true },
                 Desc: { type: String, required: false },
                 Equipment: { type: String, required: true },
-                Level: { type: String, required: true }
+                Level: { type: String, required: true },
+                imageUrl: { type: String, required: true },
+                Sets: { type: String, required: true },
+                Reps: { type: String, required: true }
             }
         ],
         BackDay: [
@@ -64,7 +73,10 @@ const userSchema = new Schema({
                 Type: { type: String, required: true },
                 Desc: { type: String, required: false },
                 Equipment: { type: String, required: true },
-                Level: { type: String, required: true }
+                Level: { type: String, required: true },
+                imageUrl: { type: String, required: true },
+                Sets: { type: String, required: true },
+                Reps: { type: String, required: true }
             }
         ],
         ShoulderDay: [
@@ -75,7 +87,10 @@ const userSchema = new Schema({
                 Type: { type: String, required: true },
                 Desc: { type: String, required: false },
                 Equipment: { type: String, required: true },
-                Level: { type: String, required: true }
+                Level: { type: String, required: true },
+                imageUrl: { type: String, required: true },
+                Sets: { type: String, required: true },
+                Reps: { type: String, required: true }
             }
         ]
     },
@@ -115,7 +130,10 @@ userSchema.methods.addToChestDay = function(exercise) {
                 Type: exercise.Type,
                 Desc: exercise.Desc,
                 Equipment: exercise.Equipment,
-                Level: exercise.Level
+                Level: exercise.Level,
+                imageUrl: exercise.imageUrl,
+                Sets: exercise.Sets,
+                Reps: exercise.Reps
             });
         }
         // const updatedWorkoutPlan = {
@@ -142,7 +160,10 @@ userSchema.methods.addToBackDay = function(exercise) {
             Type: exercise.Type,
             Desc: exercise.Desc,
             Equipment: exercise.Equipment,
-            Level: exercise.Level
+            Level: exercise.Level,
+            imageUrl: exercise.imageUrl,
+            Sets: exercise.Sets,
+            Reps: exercise.Reps
         });
     }
     this.workoutPlan.BackDay = updatedBackDay;
@@ -166,7 +187,10 @@ userSchema.methods.addToArmDay = function(exercise) {
             Type: exercise.Type,
             Desc: exercise.Desc,
             Equipment: exercise.Equipment,
-            Level: exercise.Level
+            Level: exercise.Level,
+            imageUrl: exercise.imageUrl,
+            Sets: exercise.Sets,
+            Reps: exercise.Reps
         });
     }
     this.workoutPlan.ArmDay = updatedArmDay;
@@ -190,7 +214,10 @@ userSchema.methods.addToLegDay = function(exercise) {
             Type: exercise.Type,
             Desc: exercise.Desc,
             Equipment: exercise.Equipment,
-            Level: exercise.Level
+            Level: exercise.Level,
+            imageUrl: exercise.imageUrl,
+            Sets: exercise.Sets,
+            Reps: exercise.Reps
         });
     }
     this.workoutPlan.LegDay = updatedLegDay;
@@ -214,7 +241,10 @@ userSchema.methods.addToShoulderDay = function(exercise) {
             Type: exercise.Type,
             Desc: exercise.Desc,
             Equipment: exercise.Equipment,
-            Level: exercise.Level
+            Level: exercise.Level,
+            imageUrl: exercise.imageUrl,
+            Sets: exercise.Sets,
+            Reps: exercise.Reps
         });
     }
     this.workoutPlan.ShoulderDay = updatedShoulderDay;
@@ -234,7 +264,10 @@ userSchema.methods.addChestExercisesToWorkoutPlan = function(exercises) {
             Type: exercise.Type,
             Desc: exercise.Desc,
             Equipment: exercise.Equipment,
-            Level: exercise.Level
+            Level: exercise.Level,
+            imageUrl: exercise.imageUrl,
+            Sets: exercise.Sets,
+            Reps: exercise.Reps
         })
     }
     this.workoutPlan.ChestDay = ChestExercises
@@ -251,7 +284,10 @@ userSchema.methods.addLegExercisesToWorkoutPlan = function(exercises) {
             Type: exercise.Type,
             Desc: exercise.Desc,
             Equipment: exercise.Equipment,
-            Level: exercise.Level
+            Level: exercise.Level,
+            imageUrl: exercise.imageUrl,
+            Sets: exercise.Sets,
+            Reps: exercise.Reps
         })
     }
     this.workoutPlan.LegDay = LegExercises
@@ -268,7 +304,10 @@ userSchema.methods.addArmExercisesToWorkoutPlan = function(exercises) {
             Type: exercise.Type,
             Desc: exercise.Desc,
             Equipment: exercise.Equipment,
-            Level: exercise.Level
+            Level: exercise.Level,
+            imageUrl: exercise.imageUrl,
+            Sets: exercise.Sets,
+            Reps: exercise.Reps
         })
     }
     this.workoutPlan.ArmDay = ArmExercises
@@ -285,7 +324,10 @@ userSchema.methods.addBackExercisesToWorkoutPlan = function(exercises) {
             Type: exercise.Type,
             Desc: exercise.Desc,
             Equipment: exercise.Equipment,
-            Level: exercise.Level
+            Level: exercise.Level,
+            imageUrl: exercise.imageUrl,
+            Sets: exercise.Sets,
+            Reps: exercise.Reps
         })
     }
     this.workoutPlan.BackDay = BackExercises
@@ -302,7 +344,10 @@ userSchema.methods.addShoulderExercisesToWorkoutPlan = function(exercises) {
             Type: exercise.Type,
             Desc: exercise.Desc,
             Equipment: exercise.Equipment,
-            Level: exercise.Level
+            Level: exercise.Level,
+            imageUrl: exercise.imageUrl,
+            Sets: exercise.Sets,
+            Reps: exercise.Reps
         })
     }
     this.workoutPlan.ShoulderDay = ShoulderExercises
