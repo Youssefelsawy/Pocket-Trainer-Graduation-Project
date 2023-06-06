@@ -88,6 +88,6 @@ router.get('/abdominals/stretches', fetchingStretcheSController.getAbdominalsExe
 // edit/delete account
 router.patch('/edit/profile', isAuth, userProfile.editProfile);
 
-router.delete('delete/profile/:id', isAuth, userProfile.deleteProfile)
+router.delete('/delete/profile/:id', isAuth, userProfile.deleteProfile)
 
 module.exports = router;
