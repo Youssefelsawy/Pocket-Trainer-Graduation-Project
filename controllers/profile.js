@@ -18,7 +18,7 @@ exports.editProfile = async (req, res) => {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
       user.password = hashedPassword;
     }
-
+    console.log(req.file)
     if (req.file) {
       user.photo.data = fs.readFileSync(req.file.path);
       user.photo.contentType = req.file.mimetype;
