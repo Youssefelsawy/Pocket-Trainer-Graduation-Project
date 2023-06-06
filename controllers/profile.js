@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const fs = require('fs');
+const multer = require('multer');
+
 
 
 exports.editProfile = async (req, res) => {
@@ -18,7 +20,7 @@ exports.editProfile = async (req, res) => {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
       user.password = hashedPassword;
     }
-    console.log(req.files.photo)
+    console.log(req.file)
     if (req.file) {
       user.photo.data = fs.readFileSync(req.file.path);
       user.photo.contentType = req.file.mimetype;
