@@ -40,7 +40,7 @@ exports.signUp = async (req, res) => {
         if (user) {
           return res.status(409).json({ error: 'User already exists' });
         }
-    
+        console.log(req.file)
         // Hash password and create user
         const hashedPassword = await bcrypt.hash(password, 10);
         user = new User({

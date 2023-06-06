@@ -1,4 +1,6 @@
 const express = require('express');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 const fetchingExerciseSController = require('../controllers/fetching-exercise(s)');
 
@@ -86,7 +88,7 @@ router.get('/abdominals/stretches', fetchingStretcheSController.getAbdominalsExe
 
 
 // edit/delete account
-router.put('/edit/profile', isAuth, userProfile.editProfile);
+router.put('/edit/profile', isAuth, upload.single('photo'), userProfile.editProfile);
 
 router.delete('/delete/profile/:id', isAuth, userProfile.deleteProfile)
 
