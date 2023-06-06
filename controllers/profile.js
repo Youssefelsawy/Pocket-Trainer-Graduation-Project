@@ -5,8 +5,8 @@ const fs = require('fs');
 
 exports.editProfile = async (req, res) => {
   try {
-    const userId = req.params.userId;
-    const user = await User.findById(userId);
+    //const userId = req.params.userId;
+    const user = await User.findById(req.user._id);
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
@@ -33,3 +33,10 @@ exports.editProfile = async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 };
+
+
+exports.deleteProfile = async (req, res) => {
+    const userId = req.params.id
+    await User.deleteOne(userId)
+    res.status(202).json({ message: 'User deleted' });
+}
