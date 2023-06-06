@@ -18,7 +18,7 @@ exports.editProfile = async (req, res) => {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
       user.password = hashedPassword;
     }
-    console.log(req.file)
+    console.log(req.files.photo)
     if (req.file) {
       user.photo.data = fs.readFileSync(req.file.path);
       user.photo.contentType = req.file.mimetype;
@@ -26,7 +26,7 @@ exports.editProfile = async (req, res) => {
 
     await user.save();
 
-    res.status(200).json({ message: 'User updated' });
+    res.status(200).json({ message: 'User updated successfully' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Server error' });
