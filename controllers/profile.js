@@ -35,6 +35,6 @@ exports.editProfile = async (req, res) => {
 
 
 exports.deleteProfile = async (req, res) => {
-      const user = await User.findByIdAndDelete(req.user._id);
+      await User.findByIdAndDelete(req.user._id);
       res.status(202).json({ message: 'User deleted' });
   };
