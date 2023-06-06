@@ -12,6 +12,8 @@ const deleteExerciseFromWorkoutPlan = require('../controllers/delete-exercise-wo
 
 const addingExerciseToWorkoutPlan = require('../controllers/adding-exercise-workoutplan')
 
+const userProfile = require('../controllers/profile')
+
 const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
@@ -82,5 +84,8 @@ router.get('/shoulder/stretches', fetchingStretcheSController.getShloulderStretc
 
 router.get('/abdominals/stretches', fetchingStretcheSController.getAbdominalsExercises);
 
+
+// edit/delete account
+router.patch('/edit/profile/:userId', userProfile.editProfile);
 
 module.exports = router;
