@@ -41,13 +41,13 @@ exports.deleteProfile = async (req, res) => {
   };
 
 
-exports.deletePhoto = (req, res) => {
+exports.deletePhoto = async (req, res) => {
     try {
       const user = req.user
 
       if(user.photo) {
         delete user.photo
-        user.save()
+        await user.save()
         res.status(200).json({ message: 'Photo deleted successfully' })
       }
 
