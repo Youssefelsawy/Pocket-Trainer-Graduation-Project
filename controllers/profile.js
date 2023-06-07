@@ -44,15 +44,15 @@ exports.deleteProfile = async (req, res) => {
 exports.deletePhoto = async (req, res) => {
     try {
       const user = req.user
+      
+      if(!user.photo) {
+        res.status(200).json({ message: 'There is No Photo' })
+      }
 
       if(user.photo) {
         user.photo = undefined
         await user.save()
         res.status(200).json({ message: 'Photo deleted successfully' })
-      }
-
-      if(!user.photo) {
-        res.status(200).json({ message: 'There is No Photo' })
       }
 
     } catch (error) {
