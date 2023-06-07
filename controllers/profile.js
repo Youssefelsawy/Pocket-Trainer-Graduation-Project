@@ -46,7 +46,7 @@ exports.deletePhoto = async (req, res) => {
       const user = req.user
 
       if(user.photo) {
-        delete user.photo
+        user.photo = undefined
         await user.save()
         res.status(200).json({ message: 'Photo deleted successfully' })
       }
