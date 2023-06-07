@@ -103,4 +103,6 @@ router.patch('/edit/profile', isAuth, upload.single('photo'), userProfile.editPr
 
 router.delete('/delete/profile', isAuth, userProfile.deleteProfile)
 
+router.delete('/delete/profile/photo', isAuth, userProfile.deletePhoto)
+
 module.exports = router;

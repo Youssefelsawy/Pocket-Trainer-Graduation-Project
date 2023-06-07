@@ -39,3 +39,24 @@ exports.deleteProfile = async (req, res) => {
       await User.findByIdAndDelete(req.user._id);
       res.status(202).json({ message: 'User deleted' });
   };
+
+
+exports.deletePhoto = (req, res) => {
+    try {
+      const user = req.user
+
+      if(user.photo) {
+        delete user.photo
+        user.save()
+        res.status(200).json({ message: 'Photo deleted successfully' })
+      }
+
+      if(!user.photo) {
+        res.status(200).json({ message: 'There is No Photo' })
+      }
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Server error' });
+    }
+}
