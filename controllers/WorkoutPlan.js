@@ -1,6 +1,6 @@
 const Exercise = require('../models/exercise');
 
-module.exports = (req, res, next) => {
+exports.RecomendWorkoutPlan = (req, res, next) => {
     let Training_Location = req.body.training_location
     let goal = req.body.goal
     let level = req.body.level
@@ -980,5 +980,50 @@ module.exports = (req, res, next) => {
         console.error(err);
         res.status(500).send("Error adding exercises to workout plan");
       });
+    }
+};
+
+
+// replace exercise in workoutPlan
+exports.ReplaceExercise = async (req, res) => {
+    const OldExerciseId = req.body.OldExerciseId
+    const NewExerciseId = req.body.NewExerciseId
+
+    await req.user.removeExerciseFromWorkoutPlan(OldExerciseId)
+
+    const exercise = Exercise.findById(OldExerciseId)
+    
+    if(exercise.BodyPart == "Chest") {
+      Exercise.findById(NewExerciseId)
+      .then(exercise => {
+          return req.user.addToChestDay(exercise)
+      }).then(result => {
+          if(exist) {
+              res.status(200).send('this exercise already added in your workoutPlan');
+          } else {
+              res.status(201).send(result)
+          }
+      })
+      .catch(err => {
+          console.log(err);
+          res.status(400).send("Exercise you provide does not exist")
+        });
+      exist = false;
+    } else if( exercise.BodyPart == "Adductors" || exercise.BodyPart == "Hamstrings" || exercise.BodyPart == "Calves" || exercise.BodyPart == "Quadriceps" || exercise.BodyPart == "Glutes" ) {
+      Exercise.findById(NewExerciseId)
+        .then(exercise => {
+            return req.user.addToLegDay(exercise)
+        }).then(result => {
+            if(exist) {
+                res.status(200).send('this exercise already added in your workoutPlan');
+            } else {
+                res.status(201).send(result)
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(400).send("Exercise you provide does not exist")
+            });
+        exist = false;
     }
 };

@@ -38,7 +38,7 @@ exports.editProfile = async (req, res) => {
 exports.deleteProfile = async (req, res) => {
       await User.findByIdAndDelete(req.user._id);
       res.status(202).json({ message: 'User deleted' });
-  };
+};
 
 
 exports.deletePhoto = async (req, res) => {
@@ -59,4 +59,9 @@ exports.deletePhoto = async (req, res) => {
       console.error(error);
       res.status(500).json({ error: 'Server error' });
     }
-}
+};
+
+
+exports.forgetPassword = (req, res) => {
+
+};
