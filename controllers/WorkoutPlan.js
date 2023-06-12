@@ -992,7 +992,7 @@ exports.ReplaceExercise = async (req, res) => {
     await req.user.removeExerciseFromWorkoutPlan(OldExerciseId)
 
     const exercise = Exercise.findById(OldExerciseId)
-    console.log(exercise.BodyPart)
+    console.log(exercise)
     if(exercise.BodyPart == "Chest") {
       Exercise.findById(NewExerciseId)
       .then(exercise => {
