@@ -991,8 +991,8 @@ exports.ReplaceExercise = async (req, res) => {
 
     await req.user.removeExerciseFromWorkoutPlan(OldExerciseId)
 
-    const exercise = await Exercise.findById(OldExerciseId)
-    console.log(exercise)
+    const exercise = await Exercise.findById(NewExerciseId)
+
     if(exercise.BodyPart == "Chest") {
       Exercise.findById(NewExerciseId)
       .then(exercise => {
@@ -1009,10 +1009,66 @@ exports.ReplaceExercise = async (req, res) => {
           res.status(400).send("Exercise you provide does not exist")
         });
       exist = false;
+
+
     } else if( exercise.BodyPart == "Adductors" || exercise.BodyPart == "Hamstrings" || exercise.BodyPart == "Calves" || exercise.BodyPart == "Quadriceps" || exercise.BodyPart == "Glutes" ) {
       Exercise.findById(NewExerciseId)
         .then(exercise => {
             return req.user.addToLegDay(exercise)
+        }).then(result => {
+            if(exist) {
+                res.status(200).send('this exercise already added in your workoutPlan');
+            } else {
+                res.status(201).send(result)
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(400).send("Exercise you provide does not exist")
+            });
+        exist = false;
+
+
+    } else if( exercise.BodyPart == "Lats" || exercise.BodyPart == "Lower Back" || exercise.BodyPart == "Middle Back" ) {
+      Exercise.findById(NewExerciseId)
+        .then(exercise => {
+            return req.user.addToBackDay(exercise)
+        }).then(result => {
+            if(exist) {
+                res.status(200).send('this exercise already added in your workoutPlan');
+            } else {
+                res.status(201).send(result)
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(400).send("Exercise you provide does not exist")
+          });
+        exist = false;
+
+
+    } else if( exercise.BodyPart == "Triceps" || exercise.BodyPart == "Briceps" || exercise.BodyPart == "Forearms" ) {
+      Exercise.findById(NewExerciseId)
+      .then(exercise => {
+          return req.user.addToArmDay(exercise)
+      }).then(result => {
+          if(exist) {
+              res.status(200).send('this exercise already added in your workoutPlan');
+          } else {
+              res.status(201).send(result)
+          }
+      })
+      .catch(err => {
+          console.log(err);
+          res.status(400).send("Exercise you provide does not exist")
+          });
+      exist = false;
+
+
+    } else if( exercise.BodyPart == "Shoulders" || exercise.BodyPart == "Neck" || exercise.BodyPart == "Traps" ) {
+      Exercise.findById(NewExerciseId)
+        .then(exercise => {
+            return req.user.addToShoulderDay(exercise)
         }).then(result => {
             if(exist) {
                 res.status(200).send('this exercise already added in your workoutPlan');
