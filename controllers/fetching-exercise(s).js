@@ -55,16 +55,6 @@ exports.getAbdominalsExercises = (req, res, next) => {
   .catch(err => console.log(err));
 };
 
-
-exports.getWorkoutPlan = (req, res, next) => {
-  req.user
-  .populate()
-  .then(user => {
-    res.send(user.workoutPlan);
-  })
-};
-
-
 exports.getExerciseById = (req, res, next) => {
   const exeId = req.params.exerciseId;
   Exercise.findById(exeId)

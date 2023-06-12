@@ -1083,3 +1083,12 @@ exports.ReplaceExercise = async (req, res) => {
         exist = false;
     }
 };
+
+
+exports.getWorkoutPlan = (req, res, next) => {
+  req.user
+  .populate()
+  .then(user => {
+    res.send(user.workoutPlan);
+  })
+};
