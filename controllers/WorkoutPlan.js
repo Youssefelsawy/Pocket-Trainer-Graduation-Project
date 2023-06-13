@@ -1047,7 +1047,7 @@ exports.ReplaceExercise = async (req, res) => {
         exist = false;
 
 
-    } else if( exercise.BodyPart == "Triceps" || exercise.BodyPart == "Briceps" || exercise.BodyPart == "Forearms" ) {
+    } else if( exercise.BodyPart == "Triceps" || exercise.BodyPart == "Biceps" || exercise.BodyPart == "Forearms" ) {
       Exercise.findById(NewExerciseId)
       .then(exercise => {
           return req.user.addToArmDay(exercise)

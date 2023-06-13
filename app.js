@@ -18,6 +18,7 @@ const app = express();
 const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/user');
 const authRoutes = require('./routes/auth')
+const exercisesRoutes = require('./routes/Exercises')
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -48,6 +49,7 @@ app.use(authRoutes);
 
 app.use('/admin', adminRoutes);
 app.use(userRoutes);
+app.use(exercisesRoutes);
 
 app.use((error, req, res, next) => {
     console.error(error); // Log the error for debugging purposes

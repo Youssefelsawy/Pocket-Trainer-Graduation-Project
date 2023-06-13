@@ -67,17 +67,4 @@ exports.getExerciseById = (req, res, next) => {
 
 
 
-// const exerciseId = req.params.exerciseId;
-// Exercise.findById(exerciseId)
-// .then(exercise => {
-//   return req.user.addToWorkoutPlan(exercise);
-// }).then(result => {
-//   if (exist) {
-//     res.send('this exercise already added in your workoutPlan');
-//   }else {
-//     console.log(result);
-//     res.send(result);
-//   }
-// });
-// exist = false;
 
