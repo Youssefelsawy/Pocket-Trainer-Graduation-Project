@@ -36,3 +36,7 @@ router.get('/leg/stretches', fetchingStretcheSController.getLegStretches);
 router.get('/shoulder/stretches', fetchingStretcheSController.getShloulderStretches);
 
 router.get('/abdominals/stretches', fetchingStretcheSController.getAbdominalsExercises);
+
+
+
+module.exports = router;
