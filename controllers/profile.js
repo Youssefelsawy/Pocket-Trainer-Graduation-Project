@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const fs = require('fs');
+const nodemailer = require("nodemailer");
 
 
 
@@ -91,4 +92,23 @@ exports.forgotPassword = async (req, res) => {
     //return error;
     console.log("error sending email");
   }
+};
+
+const sendEmail = async (options) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "yosefelsawy406@gmail.com",
+      pass: "eljoo406",
+    },
+  });
+
+  const mailOptions = {
+    from: "yosefelsawy406@gmail.com",
+    to: req.user.email,
+    subject: "Password Reset Request",
+    html: message,
+  };
+
+  await transporter.sendMail(mailOptions);
 };
