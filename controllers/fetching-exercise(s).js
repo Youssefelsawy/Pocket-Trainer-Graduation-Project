@@ -66,7 +66,7 @@ exports.getExerciseById = (req, res, next) => {
 };
 
 exports.getSimilarExercises = async (req, res, next) => {
-  const exercise = await Exercise.findById(req.body.exerciseId);
+  const exercise = await Exercise.findById(req.params.exerciseId);
   Exercise.find({"BodyPart": exercise.BodyPart})
   .then(exercises => {
     res.send(exercises);
