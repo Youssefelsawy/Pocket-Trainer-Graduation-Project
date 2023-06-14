@@ -68,7 +68,11 @@ exports.forgotPassword = async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
       res.status(404).send("user does not exist")
-    } else(res.status(200).send("user exist"))
+    } else {
+        const resetToken = await user.createPasswordResetToken();
+        await user.save({ validateBeforeSave: false });
+        return resetToken;
+    }
 
   // //1)Get user based on email
   // const user = await User.findOne({ email: req.body.email });
@@ -103,7 +107,6 @@ exports.forgotPassword = async (req, res) => {
   //     message: "token sent to email",
   //   });
   // } catch (err) {
-  //   console.log(err)
   //   user.passwordResetToken = undefined;
   //   user.passwordResetExpires = undefined;
   //   await user.save({ validateBeforeSave: false });
