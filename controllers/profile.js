@@ -73,7 +73,7 @@ exports.forgotPassword = async (req, res) => {
         await user.save({ validateBeforeSave: false });
         res.status(200).json({
         status: "success",
-        message: resetToken,
+        token: resetToken,
       });
     }
 
