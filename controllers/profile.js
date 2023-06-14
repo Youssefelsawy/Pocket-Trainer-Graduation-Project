@@ -62,6 +62,33 @@ exports.deletePhoto = async (req, res) => {
 };
 
 
-exports.forgetPassword = (req, res) => {
-
+exports.forgotPassword = async (req, res) => {
+  //1)Get user based on email
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    throw error("user does not exist");
+  }
+  //2)Generate random token
+  const resetToken = user.createPasswordResetToken();
+  await user.save({ validateBeforeSave: false });
+  //3)Send it to user's email
+  // const resetURL = `http://localhost:3000/login/ResetPassword/${resetToken}`;
+  const message = `You requested a password reset. Click <a href="http://localhost:3000/login/resetPassword?token=${resetToken}">here</a> to reset your password`;
+  try {
+    await sendEmail({
+      email: req.body.email,
+      subject: `your password reset token {valid for 10 min}`,
+      message,
+    });
+    res.status(200).json({
+      status: "success",
+      message: "token sent to email",
+    });
+  } catch (err) {
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+    //return error;
+    console.log("error sending email");
+  }
 };

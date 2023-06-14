@@ -21,7 +21,9 @@ const userSchema = new Schema({
     photo: {
         data: Buffer,
         contentType: String
-      },
+    },
+    passwordResetToken : String,
+    passwordResetExpires : Date,
     workoutPlan: {
         ChestDay: [
             {
@@ -110,6 +112,19 @@ const userSchema = new Schema({
         ]
     }
 });
+
+
+
+//forget password
+UserSchema.methods.createPasswordResetToken = function (){
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+    this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+    console.log({resetToken},this.passwordResetToken);
+    return resetToken;
+ }
+
+
 
 //WorkoutPlan Methods
 //user add exercises to workoutplan and check if it is already exist
