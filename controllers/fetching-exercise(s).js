@@ -65,8 +65,8 @@ exports.getExerciseById = (req, res, next) => {
   .catch(err => console.log(err));
 };
 
-exports.getSimilarExercises = (req, res, next) => {
-  const exercise = Exercise.findById(req.body.exerciseId);
+exports.getSimilarExercises = async (req, res, next) => {
+  const exercise = await Exercise.findById(req.body.exerciseId);
   Exercise.find({"BodyPart": exercise.BodyPart})
   .then(exercises => {
     res.send(exercises);
