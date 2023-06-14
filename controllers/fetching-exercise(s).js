@@ -55,9 +55,9 @@ exports.getAbdominalsExercises = (req, res, next) => {
   .catch(err => console.log(err));
 };
 
-exports.getExerciseById = (req, res, next) => {
+exports.getExerciseById = async (req, res, next) => {
   const exeId = req.params.exerciseId;
-  Exercise.findById(exeId)
+  await Exercise.findById(exeId)
   
   .then(exercise => {
     res.send(exercise);
@@ -67,10 +67,20 @@ exports.getExerciseById = (req, res, next) => {
 
 exports.getSimilarExercises = async (req, res, next) => {
   const exercise = await Exercise.findById(req.params.exerciseId);
-  Exercise.find({"BodyPart": exercise.BodyPart})
-  .then(exercises => {
-    res.send(exercises);
-  }).catch(err => console.log(err))
+
+  try {
+    if(exercise) {
+      await Exercise.find({"BodyPart": exercise.BodyPart})
+      .then(exercises => {
+        res.send(exercises);
+      })
+    } else if(!exercise) {
+      res.json({message: "exercise not found"})
+    }
+  } catch {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
 };
 
 
