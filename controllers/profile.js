@@ -67,7 +67,7 @@ exports.deletePhoto = async (req, res) => {
 exports.forgotPassword = async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
-      throw error("user does not exist");
+      res.status(404).send("user does not exist")
     } else(res.status(200).send("user exist"))
 
   // //1)Get user based on email
