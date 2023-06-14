@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const meal = require('./meal');
+const crypto = require("crypto");
 
 const Schema = mongoose.Schema;
 

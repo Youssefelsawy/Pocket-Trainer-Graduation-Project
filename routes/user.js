@@ -77,6 +77,6 @@ router.delete('/delete/profile', isAuth, userProfile.deleteProfile)
 
 router.patch('/delete/profile/photo', isAuth, userProfile.deletePhoto)
 
-router.patch('/resetPassword', isAuth, userProfile.forgotPassword)
+router.patch('/resetPassword', userProfile.forgotPassword)
 
 module.exports = router;
