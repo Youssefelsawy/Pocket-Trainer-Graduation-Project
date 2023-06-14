@@ -22,6 +22,8 @@ router.get('/shoulder/exercises', fetchingExerciseSController.getShoulderExercis
 
 router.get('/abdominals/exercises', fetchingExerciseSController.getAbdominalsExercises);
 
+router.get('/similar/exercises', fetchingExerciseSController.getSimilarExercises);
+
 
 
 //Stretch Routes

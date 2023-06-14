@@ -65,43 +65,48 @@ exports.deletePhoto = async (req, res) => {
 
 
 exports.forgotPassword = async (req, res) => {
-  //1)Get user based on email
-  const user = await User.findOne({ email: req.body.email });
-  if (!user) {
-    throw error("user does not exist");
-  }
-  //2)Generate random token
-  const resetToken = await user.createPasswordResetToken();
-  await user.save({ validateBeforeSave: false });
-  //3)Send it to user's email
-  const message = `You requested a password reset. Click <a href="http://localhost:3000/login/resetPassword?token=${resetToken}">here</a> to reset your password`;
-  try {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "yosefelsawy406@gmail.com",
-        pass: "ylxmuyxtvbsnsmnr",
-      },
-    });
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      throw error("user does not exist");
+    } else(res.status(200).send("user exist"))
 
-    const mailOptions = {
-      from: "yosefelsawy406@gmail.com",
-      to: "omarhishamho@gmail.com",
-      subject: "Password Reset Request",
-      html: message,
-    };
+  // //1)Get user based on email
+  // const user = await User.findOne({ email: req.body.email });
+  // if (!user) {
+  //   throw error("user does not exist");
+  // }
+  // //2)Generate random token
+  // const resetToken = await user.createPasswordResetToken();
+  // await user.save({ validateBeforeSave: false });
+  // //3)Send it to user's email
+  // const message = `You requested a password reset. Click <a href="http://localhost:3000/login/resetPassword?token=${resetToken}">here</a> to reset your password`;
+  // try {
+  //   const transporter = nodemailer.createTransport({
+  //     service: "gmail",
+  //     auth: {
+  //       user: "yosefelsawy406@gmail.com",
+  //       pass: "ylxmuyxtvbsnsmnr",
+  //     },
+  //   });
 
-    await transporter.sendMail(mailOptions);
+  //   const mailOptions = {
+  //     from: "yosefelsawy406@gmail.com",
+  //     to: "omarhishamho@gmail.com",
+  //     subject: "Password Reset Request",
+  //     html: message,
+  //   };
 
-    res.status(200).json({
-      status: "success",
-      message: "token sent to email",
-    });
-  } catch (err) {
-    console.log(err)
-    user.passwordResetToken = undefined;
-    user.passwordResetExpires = undefined;
-    await user.save({ validateBeforeSave: false });
-    console.log("error sending email");
-  }
+  //   await transporter.sendMail(mailOptions);
+
+  //   res.status(200).json({
+  //     status: "success",
+  //     message: "token sent to email",
+  //   });
+  // } catch (err) {
+  //   console.log(err)
+  //   user.passwordResetToken = undefined;
+  //   user.passwordResetExpires = undefined;
+  //   await user.save({ validateBeforeSave: false });
+  //   console.log("error sending email");
+  // }
 };
