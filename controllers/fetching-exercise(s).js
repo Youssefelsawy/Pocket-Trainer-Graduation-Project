@@ -65,6 +65,14 @@ exports.getExerciseById = (req, res, next) => {
   .catch(err => console.log(err));
 };
 
+exports.getSimilarExercises = (req, res, next) => {
+  const exercise = Exercise.findById(req.body.exerciseId);
+  Exercise.find({"BodyPart": exercise.BodyPart})
+  .then(exercises => {
+    res.send(exercises);
+  }).catch(err => console.log(err))
+};
+
 
 
 
