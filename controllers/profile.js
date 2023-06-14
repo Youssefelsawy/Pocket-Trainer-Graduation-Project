@@ -3,8 +3,6 @@ const User = require('../models/user');
 const fs = require('fs');
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
-const bcrypt = require('bcrypt');
-
 
 
 exports.editProfile = async (req, res) => {
@@ -142,9 +140,8 @@ exports.resetPassword = async (req, res) => {
   user.passwordResetToken = undefined;
   user.passwordResetExpires = undefined;
   await user.save();
-  //3)Update changePasswordAt for user
-  //4)Log user in , send JWT
-  // createSendToken(user, 200, res);
+  //3)Update changePassword for user
+
   res.status(200).json({
     status: "success",
     message: "password updated",
