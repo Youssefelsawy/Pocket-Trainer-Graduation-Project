@@ -63,6 +63,7 @@ exports.deletePhoto = async (req, res) => {
 };
 
 
+
 exports.forgotPassword = async (req, res) => {
   //1)Get user based on email
   const user = await User.findOne({ email: req.body.email });
@@ -73,14 +74,25 @@ exports.forgotPassword = async (req, res) => {
   const resetToken = await user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false });
   //3)Send it to user's email
-  // const resetURL = `http://localhost:3000/login/ResetPassword/${resetToken}`;
   const message = `You requested a password reset. Click <a href="http://localhost:3000/login/resetPassword?token=${resetToken}">here</a> to reset your password`;
   try {
-    await sendEmail({
-      email: req.body.email,
-      subject: `your password reset token {valid for 10 min}`,
-      message,
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "yosefelsawy406@gmail.com",
+        pass: "eljoo406",
+      },
     });
+
+    const mailOptions = {
+      from: "yosefelsawy406@gmail.com",
+      to: req.body.email,
+      subject: "Password Reset Request",
+      html: message,
+    };
+
+    await transporter.sendMail(mailOptions);
+
     res.status(200).json({
       status: "success",
       message: "token sent to email",
@@ -89,26 +101,6 @@ exports.forgotPassword = async (req, res) => {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false });
-    //return error;
     console.log("error sending email");
   }
-};
-
-const sendEmail = async (options) => {
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "yosefelsawy406@gmail.com",
-      pass: "eljoo406",
-    },
-  });
-
-  const mailOptions = {
-    from: "yosefelsawy406@gmail.com",
-    to: req.user.email,
-    subject: "Password Reset Request",
-    html: message,
-  };
-
-  await transporter.sendMail(mailOptions);
 };
