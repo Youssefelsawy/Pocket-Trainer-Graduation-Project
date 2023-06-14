@@ -71,7 +71,10 @@ exports.forgotPassword = async (req, res) => {
     } else {
         const resetToken = await user.createPasswordResetToken();
         await user.save({ validateBeforeSave: false });
-        return resetToken;
+        res.status(200).json({
+        status: "success",
+        message: resetToken,
+      });
     }
 
   // //1)Get user based on email
@@ -112,4 +115,35 @@ exports.forgotPassword = async (req, res) => {
   //   await user.save({ validateBeforeSave: false });
   //   console.log("error sending email");
   // }
+};
+
+
+exports.resetPassword = async (req, res) => {
+  //1)Get user based on token
+  const hashedToken = crypto
+    .createHash("sha256")
+    .update(req.params.token)
+    .digest("hex");
+  const user = await User.findOne({
+    passwordResetToken: hashedToken,
+    passwordResetExpires: { $gt: Date.now() },
+  });
+  //2)if token not expirted and user exists -> set new password
+  if (!user) {
+    return res.status(400).json({
+      status: "error",
+      message: "Invalid or expired verification token.",
+    });
+  }
+  user.password = req.body.password;
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+  await user.save();
+  //3)Update changePasswordAt for user
+  //4)Log user in , send JWT
+  // createSendToken(user, 200, res);
+  res.status(200).json({
+    status: "success",
+    message: "password updated "+req.body.password,
+  });
 };
