@@ -3,6 +3,7 @@ const User = require('../models/user');
 const fs = require('fs');
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const bcrypt = require('bcrypt');
 
 
 
@@ -136,7 +137,8 @@ exports.resetPassword = async (req, res) => {
       message: "Invalid or expired verification token.",
     });
   }
-  user.password = req.body.password;
+  const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  user.password = hashedPassword;
   user.passwordResetToken = undefined;
   user.passwordResetExpires = undefined;
   await user.save();
@@ -145,6 +147,6 @@ exports.resetPassword = async (req, res) => {
   // createSendToken(user, 200, res);
   res.status(200).json({
     status: "success",
-    message: "password updated "+req.body.password,
+    message: "password updated",
   });
 };
