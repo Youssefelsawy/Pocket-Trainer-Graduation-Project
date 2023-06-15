@@ -56,17 +56,20 @@ exports.getAbdominalsExercises = (req, res, next) => {
 };
 
 exports.getExerciseById = async (req, res, next) => {
-  const exeId = req.params.exerciseId;
-  await Exercise.findById(exeId)
-  
-  .then(exercise => {
+  try {
+    const exercise = await Exercise.findOne(req.params.exerciseName);
+    if (!exercise) {
+      return res.status(404).send("Exercise not found");
+    }
     res.send(exercise);
-  })
-  .catch(err => console.log(err));
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Internal server error");
+  }
 };
 
 exports.getSimilarExercises = async (req, res, next) => {
-  const exercise = await Exercise.findById(req.params.exerciseId);
+  const exercise = await Exercise.findOne(req.params.exerciseName);
 
   try {
     if(exercise) {
