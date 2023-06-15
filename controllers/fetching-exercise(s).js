@@ -69,20 +69,51 @@ exports.getExerciseById = async (req, res, next) => {
 };
 
 exports.getSimilarExercises = async (req, res, next) => {
+  let Training_Location = req.body.training_location
+  let goal = req.body.goal
+  let level = req.body.level
   const exercise = await Exercise.findOne({"Title": req.body.exerciseName});
 
-  try {
-    if(exercise) {
-      await Exercise.find({"BodyPart": exercise.BodyPart})
-      .then(exercises => {
-        res.send(exercises);
-      })
-    } else if(!exercise) {
-      res.json({message: "exercise not found"})
-    }
-  } catch {
-    console.error(error);
-    res.status(500).json({ error: 'Server error' });
+  if (Training_Location == "Home" && goal == "Bulk") {
+    Exercise.find({ 'Equipment': "Body Only", 'Type': "Strength", 'Level': level, "BodyPart": exercise.BodyPart })
+    .then(exercises => {
+      res.send(exercises)
+    })
+  }
+
+  else if(Training_Location == "Gym" && goal == "Bulk") {
+    Exercise.find({ 'Equipment': {$ne: "Body Only"}, 'Type': "Strength", 'Level': level, "BodyPart": exercise.BodyPart })
+    .then(exercises => {
+      res.send(exercises)
+    })
+  }
+
+  else if(Training_Location == "Home" && goal == "Cardio") {
+    Exercise.find({ 'Equipment': "Body Only", 'Type': {$in: ["Cardio", "Plyometrics"]}, 'Level': level, "BodyPart": exercise.BodyPart })
+    .then(exercises => {
+      res.send(exercises)
+    })
+  }
+
+  else if(Training_Location == "Gym" && goal == "Cardio") {
+    Exercise.find({ 'Type': { $in: ["Cardio", "Plyometrics"] }, 'Level': level, "BodyPart": exercise.BodyPart })
+    .then(exercises => {
+      res.send(exercises)
+    })
+  }
+
+  else if(Training_Location == "Home" && goal == "Cut") {
+    Exercise.find({ 'Equipment': "Body Only", 'Type': {$in: ["Cardio", "Strength"]}, 'Level': level, "BodyPart": exercise.BodyPart })
+    .then(exercises => {
+      res.send(exercises)
+    })
+  }
+  
+  else if(Training_Location == "Gym" && goal == "Cut") {
+    Exercise.find({ 'Type': { $in: ["Cardio", "Strength"] }, 'Level': level, "BodyPart": exercise.BodyPart })
+    .then(exercises => {
+      res.send(exercises)
+    })
   }
 };
 
