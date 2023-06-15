@@ -8,7 +8,7 @@ const fetchingStretcheSController = require('../controllers/fetching-stretch(s)'
 
 
 //Exercise Routes
-router.get('/exercise', fetchingExerciseSController.getExerciseById);
+router.get('/exercise/:exerciseId', fetchingExerciseSController.getExerciseById);
 
 router.get('/chest/exercises', fetchingExerciseSController.getChestExercises);
 

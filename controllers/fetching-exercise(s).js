@@ -57,7 +57,7 @@ exports.getAbdominalsExercises = (req, res, next) => {
 
 exports.getExerciseById = async (req, res, next) => {
   try {
-    const exercise = await Exercise.findOne({"Title": req.body.exerciseName});
+    const exercise = await Exercise.findById(req.params.exerciseId);
     if (!exercise) {
       return res.status(404).send("Exercise not found");
     }
