@@ -57,7 +57,7 @@ exports.getAbdominalsExercises = (req, res, next) => {
 
 exports.getExerciseById = async (req, res, next) => {
   try {
-    const exercise = await Exercise.findOne(req.body.exerciseName);
+    const exercise = await Exercise.findOne({"Title": req.body.exerciseName});
     if (!exercise) {
       return res.status(404).send("Exercise not found");
     }
@@ -69,7 +69,7 @@ exports.getExerciseById = async (req, res, next) => {
 };
 
 exports.getSimilarExercises = async (req, res, next) => {
-  const exercise = await Exercise.findOne(req.body.exerciseName);
+  const exercise = await Exercise.findOne({"Title": req.body.exerciseName});
 
   try {
     if(exercise) {
