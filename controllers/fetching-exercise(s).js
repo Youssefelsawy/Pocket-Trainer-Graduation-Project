@@ -69,10 +69,10 @@ exports.getExerciseById = async (req, res, next) => {
 };
 
 exports.getSimilarExercises = async (req, res, next) => {
-  let Training_Location = req.body.training_location
-  let goal = req.body.goal
-  let level = req.body.level
-  const exercise = await Exercise.findOne({"Title": req.body.exerciseName});
+  let Training_Location = req.params.training_location
+  let goal = req.params.goal
+  let level = req.params.level
+  const exercise = await Exercise.findOne({"Title": req.params.exerciseName});
 
   if (Training_Location == "Home" && goal == "Bulk") {
     Exercise.find({ 'Equipment': "Body Only", 'Type': "Strength", 'Level': level, "BodyPart": exercise.BodyPart })
