@@ -7,7 +7,7 @@ const crypto = require("crypto");
 
 exports.editProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id);
+    const user = await User.findOne(req.body.email);
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
