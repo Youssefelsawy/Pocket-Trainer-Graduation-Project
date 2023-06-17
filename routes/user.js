@@ -71,7 +71,7 @@ router.get('/nutritionplan/dinner', isAuth, fetchingMealSController.getDinnerInN
 
 
 // profile
-router.put('/edit/profile', isAuth, upload.single('photo'), userProfile.editProfile);
+router.put('/edit/profile', isAuth, multer.single('photo'), userProfile.editProfile);
 
 router.delete('/delete/profile', isAuth, userProfile.deleteProfile)
 

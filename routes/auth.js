@@ -16,7 +16,7 @@ router.get('/profile',isAuth, authinticationController.getProfile)
 
 router.post('/logout',isAuth, authinticationController.postLogout);
 
-router.post('/signup', upload.single('photo'), authinticationController.signUp);
+router.post('/signup', multer.single('photo'), authinticationController.signUp);
 
 
 
