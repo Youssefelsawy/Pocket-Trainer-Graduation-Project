@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 // const upload = multer({ dest: 'uploads/' });
 
+const app = express();
 app.use(multer({
     storage: {
       destination: './uploads',
