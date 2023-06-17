@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 // const session = require('express-session');
 // const MongoDBStore = require('connect-mongodb-session')(session);
 const cors = require('cors')
+const multer = require('multer');
 
 const User = require('./models/user');
 const errorController = require('./controllers/error');
@@ -28,6 +29,14 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
   });
+app.use(multer({
+  storage: {
+    destination: './uploads',
+    filename: (req, file, cb) => {
+      cb(null, file.originalname);
+    },
+  },
+}));
 // app.use(
 //     session({
 //         secret: 'my secret',
