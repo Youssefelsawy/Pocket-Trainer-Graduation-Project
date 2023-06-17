@@ -74,48 +74,511 @@ exports.getSimilarExercises = async (req, res, next) => {
   let level = req.params.level
   const exercise = await Exercise.findOne({"Title": req.params.exerciseName});
 
-  if (Training_Location == "Home" && goal == "Bulk") {
-    Exercise.find({ 'Equipment': "Body Only", 'Type': "Strength", 'Level': level, "BodyPart": exercise.BodyPart })
-    .then(exercises => {
-      res.send(exercises)
-    })
-  }
+  try{
 
-  else if(Training_Location == "Gym" && goal == "Bulk") {
-    Exercise.find({ 'Equipment': {$ne: "Body Only"}, 'Type': "Strength", 'Level': level, "BodyPart": exercise.BodyPart })
-    .then(exercises => {
-      res.send(exercises)
-    })
-  }
+    if (Training_Location == "Home" && goal == "Bulk") {
+      Exercise.find({ 'Equipment': "Body Only", 'Type': "Strength", 'Level': level, "BodyPart": exercise.BodyPart })
+      .then(exercises => {
+        
+        if( exercise.BodyPart == 'Chest' ) {
+          const map = new Map();
+          const chestExercises = req.user.workoutPlan.ChestDay;
+          for(let i=0; i<chestExercises.length; i++) {
+            map.set(chestExercises[i].exerciseId.toString(), i);
+          }
+          var similarChestExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarChestExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarChestExercises);
+        }
 
-  else if(Training_Location == "Home" && goal == "Cardio") {
-    Exercise.find({ 'Equipment': "Body Only", 'Type': {$in: ["Cardio", "Plyometrics"]}, 'Level': level, "BodyPart": exercise.BodyPart })
-    .then(exercises => {
-      res.send(exercises)
-    })
-  }
+        if( exercise.BodyPart == 'Middle Back' || exercise.BodyPart == 'Lower Back' || exercise.BodyPart == 'Lats' ) {
+          const map = new Map();
+          const BackExercises = req.user.workoutPlan.BackDay;
+          for(let i=0; i<BackExercises.length; i++) {
+            map.set(BackExercises[i].exerciseId.toString(), i);
+          }
+          var similarBackExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarBackExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarBackExercises);
+        }
 
-  else if(Training_Location == "Gym" && goal == "Cardio") {
-    Exercise.find({ 'Type': { $in: ["Cardio", "Plyometrics"] }, 'Level': level, "BodyPart": exercise.BodyPart })
-    .then(exercises => {
-      res.send(exercises)
-    })
-  }
+        if( exercise.BodyPart == 'Forearms' || exercise.BodyPart == 'Biceps' || exercise.BodyPart == 'Triceps' ) {
+          const map = new Map();
+          const ArmExercises = req.user.workoutPlan.ArmDay;
+          for(let i=0; i<ArmExercises.length; i++) {
+            map.set(ArmExercises[i].exerciseId.toString(), i);
+          }
+          var similarArmExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarArmExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarArmExercises);
+        }
 
-  else if(Training_Location == "Home" && goal == "Cut") {
-    Exercise.find({ 'Equipment': "Body Only", 'Type': {$in: ["Cardio", "Strength"]}, 'Level': level, "BodyPart": exercise.BodyPart })
-    .then(exercises => {
-      res.send(exercises)
-    })
+        if( exercise.BodyPart == 'Quadriceps' || exercise.BodyPart == 'Hamstrings' || exercise.BodyPart == 'Glutes' || exercise.BodyPart == 'Calves' || exercise.BodyPart == 'Adductors' ) {
+          const map = new Map();
+          const LegExercises = req.user.workoutPlan.LegDay;
+          for(let i=0; i<LegExercises.length; i++) {
+            map.set(LegExercises[i].exerciseId.toString(), i);
+          }
+          var similarChestExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarChestExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarChestExercises);
+        }
+
+        if( exercise.BodyPart == 'Shoulders' || exercise.BodyPart == 'Neck' || exercise.BodyPart == 'Traps' ) {
+          const map = new Map();
+          const ShoulderExercises = req.user.workoutPlan.ShoulderDay;
+          for(let i=0; i<ShoulderExercises.length; i++) {
+            map.set(ShoulderExercises[i].exerciseId.toString(), i);
+          }
+          var similarShoulderExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarShoulderExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarShoulderExercises);
+        }
+
+      })
+    }
+
+
+
+    else if(Training_Location == "Gym" && goal == "Bulk") {
+      Exercise.find({ 'Equipment': {$ne: "Body Only"}, 'Type': "Strength", 'Level': level, "BodyPart": exercise.BodyPart })
+      .then(exercises => {
+
+        if( exercise.BodyPart == 'Chest' ) {
+          const map = new Map();
+          const chestExercises = req.user.workoutPlan.ChestDay;
+          for(let i=0; i<chestExercises.length; i++) {
+            map.set(chestExercises[i].exerciseId.toString(), i);
+          }
+          var similarChestExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarChestExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarChestExercises);
+        }
+
+        if( exercise.BodyPart == 'Middle Back' || exercise.BodyPart == 'Lower Back' || exercise.BodyPart == 'Lats' ) {
+          const map = new Map();
+          const BackExercises = req.user.workoutPlan.BackDay;
+          for(let i=0; i<BackExercises.length; i++) {
+            map.set(BackExercises[i].exerciseId.toString(), i);
+          }
+          var similarBackExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarBackExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarBackExercises);
+        }
+
+        if( exercise.BodyPart == 'Forearms' || exercise.BodyPart == 'Biceps' || exercise.BodyPart == 'Triceps' ) {
+          const map = new Map();
+          const ArmExercises = req.user.workoutPlan.ArmDay;
+          for(let i=0; i<ArmExercises.length; i++) {
+            map.set(ArmExercises[i].exerciseId.toString(), i);
+          }
+          var similarArmExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarArmExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarArmExercises);
+        }
+
+        if( exercise.BodyPart == 'Quadriceps' || exercise.BodyPart == 'Hamstrings' || exercise.BodyPart == 'Glutes' || exercise.BodyPart == 'Calves' || exercise.BodyPart == 'Adductors' ) {
+          const map = new Map();
+          const LegExercises = req.user.workoutPlan.LegDay;
+          for(let i=0; i<LegExercises.length; i++) {
+            map.set(LegExercises[i].exerciseId.toString(), i);
+          }
+          var similarChestExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarChestExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarChestExercises);
+        }
+
+        if( exercise.BodyPart == 'Shoulders' || exercise.BodyPart == 'Neck' || exercise.BodyPart == 'Traps' ) {
+          const map = new Map();
+          const ShoulderExercises = req.user.workoutPlan.ShoulderDay;
+          for(let i=0; i<ShoulderExercises.length; i++) {
+            map.set(ShoulderExercises[i].exerciseId.toString(), i);
+          }
+          var similarShoulderExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarShoulderExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarShoulderExercises);
+        }
+        
+      })
+    }
+
+
+    else if(Training_Location == "Home" && goal == "Cardio") {
+      Exercise.find({ 'Equipment': "Body Only", 'Type': {$in: ["Cardio", "Plyometrics"]}, 'Level': level, "BodyPart": exercise.BodyPart })
+      .then(exercises => {
+
+        if( exercise.BodyPart == 'Chest' ) {
+          const map = new Map();
+          const chestExercises = req.user.workoutPlan.ChestDay;
+          for(let i=0; i<chestExercises.length; i++) {
+            map.set(chestExercises[i].exerciseId.toString(), i);
+          }
+          var similarChestExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarChestExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarChestExercises);
+        }
+
+        if( exercise.BodyPart == 'Middle Back' || exercise.BodyPart == 'Lower Back' || exercise.BodyPart == 'Lats' ) {
+          const map = new Map();
+          const BackExercises = req.user.workoutPlan.BackDay;
+          for(let i=0; i<BackExercises.length; i++) {
+            map.set(BackExercises[i].exerciseId.toString(), i);
+          }
+          var similarBackExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarBackExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarBackExercises);
+        }
+
+        if( exercise.BodyPart == 'Forearms' || exercise.BodyPart == 'Biceps' || exercise.BodyPart == 'Triceps' ) {
+          const map = new Map();
+          const ArmExercises = req.user.workoutPlan.ArmDay;
+          for(let i=0; i<ArmExercises.length; i++) {
+            map.set(ArmExercises[i].exerciseId.toString(), i);
+          }
+          var similarArmExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarArmExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarArmExercises);
+        }
+
+        if( exercise.BodyPart == 'Quadriceps' || exercise.BodyPart == 'Hamstrings' || exercise.BodyPart == 'Glutes' || exercise.BodyPart == 'Calves' || exercise.BodyPart == 'Adductors' ) {
+          const map = new Map();
+          const LegExercises = req.user.workoutPlan.LegDay;
+          for(let i=0; i<LegExercises.length; i++) {
+            map.set(LegExercises[i].exerciseId.toString(), i);
+          }
+          var similarChestExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarChestExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarChestExercises);
+        }
+
+        if( exercise.BodyPart == 'Shoulders' || exercise.BodyPart == 'Neck' || exercise.BodyPart == 'Traps' ) {
+          const map = new Map();
+          const ShoulderExercises = req.user.workoutPlan.ShoulderDay;
+          for(let i=0; i<ShoulderExercises.length; i++) {
+            map.set(ShoulderExercises[i].exerciseId.toString(), i);
+          }
+          var similarShoulderExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarShoulderExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarShoulderExercises);
+        }
+        
+      })
+    }
+
+
+    else if(Training_Location == "Gym" && goal == "Cardio") {
+      Exercise.find({ 'Type': { $in: ["Cardio", "Plyometrics"] }, 'Level': level, "BodyPart": exercise.BodyPart })
+      .then(exercises => {
+
+        if( exercise.BodyPart == 'Chest' ) {
+          const map = new Map();
+          const chestExercises = req.user.workoutPlan.ChestDay;
+          for(let i=0; i<chestExercises.length; i++) {
+            map.set(chestExercises[i].exerciseId.toString(), i);
+          }
+          var similarChestExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarChestExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarChestExercises);
+        }
+
+        if( exercise.BodyPart == 'Middle Back' || exercise.BodyPart == 'Lower Back' || exercise.BodyPart == 'Lats' ) {
+          const map = new Map();
+          const BackExercises = req.user.workoutPlan.BackDay;
+          for(let i=0; i<BackExercises.length; i++) {
+            map.set(BackExercises[i].exerciseId.toString(), i);
+          }
+          var similarBackExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarBackExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarBackExercises);
+        }
+
+        if( exercise.BodyPart == 'Forearms' || exercise.BodyPart == 'Biceps' || exercise.BodyPart == 'Triceps' ) {
+          const map = new Map();
+          const ArmExercises = req.user.workoutPlan.ArmDay;
+          for(let i=0; i<ArmExercises.length; i++) {
+            map.set(ArmExercises[i].exerciseId.toString(), i);
+          }
+          var similarArmExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarArmExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarArmExercises);
+        }
+
+        if( exercise.BodyPart == 'Quadriceps' || exercise.BodyPart == 'Hamstrings' || exercise.BodyPart == 'Glutes' || exercise.BodyPart == 'Calves' || exercise.BodyPart == 'Adductors' ) {
+          const map = new Map();
+          const LegExercises = req.user.workoutPlan.LegDay;
+          for(let i=0; i<LegExercises.length; i++) {
+            map.set(LegExercises[i].exerciseId.toString(), i);
+          }
+          var similarChestExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarChestExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarChestExercises);
+        }
+
+        if( exercise.BodyPart == 'Shoulders' || exercise.BodyPart == 'Neck' || exercise.BodyPart == 'Traps' ) {
+          const map = new Map();
+          const ShoulderExercises = req.user.workoutPlan.ShoulderDay;
+          for(let i=0; i<ShoulderExercises.length; i++) {
+            map.set(ShoulderExercises[i].exerciseId.toString(), i);
+          }
+          var similarShoulderExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarShoulderExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarShoulderExercises);
+        }
+        
+      })
+    }
+
+
+    else if(Training_Location == "Home" && goal == "Cut") {
+      Exercise.find({ 'Equipment': "Body Only", 'Type': {$in: ["Cardio", "Strength"]}, 'Level': level, "BodyPart": exercise.BodyPart })
+      .then(exercises => {
+
+        if( exercise.BodyPart == 'Chest' ) {
+          const map = new Map();
+          const chestExercises = req.user.workoutPlan.ChestDay;
+          for(let i=0; i<chestExercises.length; i++) {
+            map.set(chestExercises[i].exerciseId.toString(), i);
+          }
+          var similarChestExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarChestExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarChestExercises);
+        }
+
+        if( exercise.BodyPart == 'Middle Back' || exercise.BodyPart == 'Lower Back' || exercise.BodyPart == 'Lats' ) {
+          const map = new Map();
+          const BackExercises = req.user.workoutPlan.BackDay;
+          for(let i=0; i<BackExercises.length; i++) {
+            map.set(BackExercises[i].exerciseId.toString(), i);
+          }
+          var similarBackExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarBackExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarBackExercises);
+        }
+
+        if( exercise.BodyPart == 'Forearms' || exercise.BodyPart == 'Biceps' || exercise.BodyPart == 'Triceps' ) {
+          const map = new Map();
+          const ArmExercises = req.user.workoutPlan.ArmDay;
+          for(let i=0; i<ArmExercises.length; i++) {
+            map.set(ArmExercises[i].exerciseId.toString(), i);
+          }
+          var similarArmExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarArmExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarArmExercises);
+        }
+
+        if( exercise.BodyPart == 'Quadriceps' || exercise.BodyPart == 'Hamstrings' || exercise.BodyPart == 'Glutes' || exercise.BodyPart == 'Calves' || exercise.BodyPart == 'Adductors' ) {
+          const map = new Map();
+          const LegExercises = req.user.workoutPlan.LegDay;
+          for(let i=0; i<LegExercises.length; i++) {
+            map.set(LegExercises[i].exerciseId.toString(), i);
+          }
+          var similarChestExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarChestExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarChestExercises);
+        }
+
+        if( exercise.BodyPart == 'Shoulders' || exercise.BodyPart == 'Neck' || exercise.BodyPart == 'Traps' ) {
+          const map = new Map();
+          const ShoulderExercises = req.user.workoutPlan.ShoulderDay;
+          for(let i=0; i<ShoulderExercises.length; i++) {
+            map.set(ShoulderExercises[i].exerciseId.toString(), i);
+          }
+          var similarShoulderExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarShoulderExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarShoulderExercises);
+        }
+        
+      })
+    }
+    
+
+    else if(Training_Location == "Gym" && goal == "Cut") {
+      Exercise.find({ 'Type': { $in: ["Cardio", "Strength"] }, 'Level': level, "BodyPart": exercise.BodyPart })
+      .then(exercises => {
+
+        if( exercise.BodyPart == 'Chest' ) {
+          const map = new Map();
+          const chestExercises = req.user.workoutPlan.ChestDay;
+          for(let i=0; i<chestExercises.length; i++) {
+            map.set(chestExercises[i].exerciseId.toString(), i);
+          }
+          var similarChestExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarChestExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarChestExercises);
+        }
+
+        if( exercise.BodyPart == 'Middle Back' || exercise.BodyPart == 'Lower Back' || exercise.BodyPart == 'Lats' ) {
+          const map = new Map();
+          const BackExercises = req.user.workoutPlan.BackDay;
+          for(let i=0; i<BackExercises.length; i++) {
+            map.set(BackExercises[i].exerciseId.toString(), i);
+          }
+          var similarBackExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarBackExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarBackExercises);
+        }
+
+        if( exercise.BodyPart == 'Forearms' || exercise.BodyPart == 'Biceps' || exercise.BodyPart == 'Triceps' ) {
+          const map = new Map();
+          const ArmExercises = req.user.workoutPlan.ArmDay;
+          for(let i=0; i<ArmExercises.length; i++) {
+            map.set(ArmExercises[i].exerciseId.toString(), i);
+          }
+          var similarArmExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarArmExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarArmExercises);
+        }
+
+        if( exercise.BodyPart == 'Quadriceps' || exercise.BodyPart == 'Hamstrings' || exercise.BodyPart == 'Glutes' || exercise.BodyPart == 'Calves' || exercise.BodyPart == 'Adductors' ) {
+          const map = new Map();
+          const LegExercises = req.user.workoutPlan.LegDay;
+          for(let i=0; i<LegExercises.length; i++) {
+            map.set(LegExercises[i].exerciseId.toString(), i);
+          }
+          var similarChestExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarChestExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarChestExercises);
+        }
+
+        if( exercise.BodyPart == 'Shoulders' || exercise.BodyPart == 'Neck' || exercise.BodyPart == 'Traps' ) {
+          const map = new Map();
+          const ShoulderExercises = req.user.workoutPlan.ShoulderDay;
+          for(let i=0; i<ShoulderExercises.length; i++) {
+            map.set(ShoulderExercises[i].exerciseId.toString(), i);
+          }
+          var similarShoulderExercises = [];
+          for(let i=0; i<exercises.length; i++) {
+            similarShoulderExercises = exercises.filter(exercise => {
+              return !map.has(exercise._id.toString());
+            });
+          }
+          res.send(similarShoulderExercises);
+        }
+        
+      })
+    }
+
+  }catch {
+    res.status(200).send('There is No Similar Exercises')
   }
-  
-  else if(Training_Location == "Gym" && goal == "Cut") {
-    Exercise.find({ 'Type': { $in: ["Cardio", "Strength"] }, 'Level': level, "BodyPart": exercise.BodyPart })
-    .then(exercises => {
-      res.send(exercises)
-    })
-  }
-};
+}
+
 
 
 

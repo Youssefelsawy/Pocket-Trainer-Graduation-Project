@@ -6,6 +6,8 @@ const fetchingExerciseSController = require('../controllers/fetching-exercise(s)
 
 const fetchingStretcheSController = require('../controllers/fetching-stretch(s)');
 
+const isAuth = require('../middleware/is-auth');
+
 
 //Exercise Routes
 router.get('/exercise/:exerciseId', fetchingExerciseSController.getExerciseById);
@@ -22,7 +24,7 @@ router.get('/shoulder/exercises', fetchingExerciseSController.getShoulderExercis
 
 router.get('/abdominals/exercises', fetchingExerciseSController.getAbdominalsExercises);
 
-router.get('/similar/exercises/:exerciseName/:training_location/:goal/:level', fetchingExerciseSController.getSimilarExercises);
+router.get('/similar/exercises/:exerciseName/:training_location/:goal/:level',isAuth, fetchingExerciseSController.getSimilarExercises);
 
 
 
