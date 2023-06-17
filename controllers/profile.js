@@ -7,14 +7,13 @@ const crypto = require("crypto");
 
 exports.editProfile = async (req, res) => {
   try {
-    const user = await User.findOne(req.body.email);
+    const user = await User.find(req.body.email);
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
     user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
 
     if (req.body.password) {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
