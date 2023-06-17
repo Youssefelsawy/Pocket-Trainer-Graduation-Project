@@ -2,6 +2,15 @@ const express = require('express');
 const multer = require('multer');
 // const upload = multer({ dest: 'uploads/' });
 
+app.use(multer({
+    storage: {
+      destination: './uploads',
+      filename: (req, file, cb) => {
+        cb(null, file.originalname);
+      },
+    },
+  }));
+
 const authinticationController = require('../controllers/auth');
 
 const isAuth = require('../middleware/is-auth');

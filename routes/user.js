@@ -13,6 +13,15 @@ const multer = require('multer');
 //     })
 //   });
 
+app.use(multer({
+    storage: {
+      destination: './uploads',
+      filename: (req, file, cb) => {
+        cb(null, file.originalname);
+      },
+    },
+  }));
+
 
 const fetchingMealSController = require('../controllers/fetching-meal(s)')
 
