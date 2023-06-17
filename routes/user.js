@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-// const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: 'uploads/' });
 
 // const upload = multer({
 //     storage: multer.diskStorage({
@@ -12,16 +12,6 @@ const multer = require('multer');
 //       }
 //     })
 //   });
-
-const app = express();
-app.use(multer({
-    storage: {
-      destination: './uploads',
-      filename: (req, file, cb) => {
-        cb(null, file.originalname);
-      },
-    },
-  }));
 
 
 const fetchingMealSController = require('../controllers/fetching-meal(s)')
@@ -81,7 +71,7 @@ router.get('/nutritionplan/dinner', isAuth, fetchingMealSController.getDinnerInN
 
 
 // profile
-router.put('/edit/profile', isAuth, multer.single('photo'), userProfile.editProfile);
+router.put('/edit/profile', isAuth, upload.single('photo'), userProfile.editProfile);
 
 router.delete('/delete/profile', isAuth, userProfile.deleteProfile)
 

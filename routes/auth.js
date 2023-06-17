@@ -1,16 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-// const upload = multer({ dest: 'uploads/' });
-
-const app = express();
-app.use(multer({
-    storage: {
-      destination: './uploads',
-      filename: (req, file, cb) => {
-        cb(null, file.originalname);
-      },
-    },
-  }));
+const upload = multer({ dest: 'uploads/' });
 
 const authinticationController = require('../controllers/auth');
 
@@ -26,7 +16,7 @@ router.get('/profile',isAuth, authinticationController.getProfile)
 
 router.post('/logout',isAuth, authinticationController.postLogout);
 
-router.post('/signup', multer.single('photo'), authinticationController.signUp);
+router.post('/signup', upload.single('photo'), authinticationController.signUp);
 
 
 
