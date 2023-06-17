@@ -47,12 +47,15 @@ exports.signUp = async (req, res) => {
             name,
             email,
             password: hashedPassword,
-            photo: req.file ? req.file.path : null,
+            // photo: {
+            //   data: fs.readFileSync(req.file.path),
+            //   contentType: req.file.mimetype
+            // }
           });
-          // if(req.file) {
-          //   user.photo.data = fs.readFileSync(req.file.path);
-          //   user.photo.contentType = req.file.mimetype;
-          // }
+          if(req.file) {
+            user.photo.data = fs.readFileSync(req.file.path);
+            user.photo.contentType = req.file.mimetype;
+          }
           await user.save();
           
           // Set user id in session
