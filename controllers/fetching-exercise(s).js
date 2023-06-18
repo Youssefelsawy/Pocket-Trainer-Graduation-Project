@@ -69,14 +69,14 @@ exports.getExerciseById = async (req, res, next) => {
 };
 
 exports.getSimilarExercises = async (req, res, next) => {
-  let Training_Location = req.params.training_location
-  let goal = req.params.goal
-  let level = req.params.level
+  const training_location = req.user.training_location
+  const goal = req.user.goal
+  const level = req.user.level
   const exercise = await Exercise.findOne({"Title": req.params.exerciseName});
 
   try{
 
-    if (Training_Location == "Home" && goal == "Bulk") {
+    if (training_location == "Home" && goal == "Bulk") {
       Exercise.find({ 'Equipment': "Body Only", 'Type': "Strength", 'Level': level, "BodyPart": exercise.BodyPart })
       .then(exercises => {
         
@@ -160,7 +160,7 @@ exports.getSimilarExercises = async (req, res, next) => {
 
 
 
-    else if(Training_Location == "Gym" && goal == "Bulk") {
+    else if(training_location == "Gym" && goal == "Bulk") {
       Exercise.find({ 'Equipment': {$ne: "Body Only"}, 'Type': "Strength", 'Level': level, "BodyPart": exercise.BodyPart })
       .then(exercises => {
 
@@ -243,7 +243,7 @@ exports.getSimilarExercises = async (req, res, next) => {
     }
 
 
-    else if(Training_Location == "Home" && goal == "Cardio") {
+    else if(training_location == "Home" && goal == "Cardio") {
       Exercise.find({ 'Equipment': "Body Only", 'Type': {$in: ["Cardio", "Plyometrics"]}, 'Level': level, "BodyPart": exercise.BodyPart })
       .then(exercises => {
 
@@ -326,7 +326,7 @@ exports.getSimilarExercises = async (req, res, next) => {
     }
 
 
-    else if(Training_Location == "Gym" && goal == "Cardio") {
+    else if(training_location == "Gym" && goal == "Cardio") {
       Exercise.find({ 'Type': { $in: ["Cardio", "Plyometrics"] }, 'Level': level, "BodyPart": exercise.BodyPart })
       .then(exercises => {
 
@@ -409,7 +409,7 @@ exports.getSimilarExercises = async (req, res, next) => {
     }
 
 
-    else if(Training_Location == "Home" && goal == "Cut") {
+    else if(training_location == "Home" && goal == "Cut") {
       Exercise.find({ 'Equipment': "Body Only", 'Type': {$in: ["Cardio", "Strength"]}, 'Level': level, "BodyPart": exercise.BodyPart })
       .then(exercises => {
 
@@ -492,7 +492,7 @@ exports.getSimilarExercises = async (req, res, next) => {
     }
     
 
-    else if(Training_Location == "Gym" && goal == "Cut") {
+    else if(training_location == "Gym" && goal == "Cut") {
       Exercise.find({ 'Type': { $in: ["Cardio", "Strength"] }, 'Level': level, "BodyPart": exercise.BodyPart })
       .then(exercises => {
 

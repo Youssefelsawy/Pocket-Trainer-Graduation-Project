@@ -23,6 +23,25 @@ const userSchema = new Schema({
         data: Buffer,
         contentType: String
     },
+    ListOfRequirment: {
+        HW: {
+                height: Number,
+                weight: Number
+        }
+        ,
+        workingOffDays: {
+                Day1: Number,
+                Day2: Number,
+                Day3: Number,
+                Day4: Number,
+                Day5: Number,
+                Day6: Number,
+                Day7: Number
+        },
+        training_location: String,
+        goal: String,
+        level: String,
+    },
     passwordResetToken : String,
     passwordResetExpires : Date,
     workoutPlan: {

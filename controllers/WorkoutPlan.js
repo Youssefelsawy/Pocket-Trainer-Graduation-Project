@@ -1,11 +1,21 @@
 const Exercise = require('../models/exercise');
 
-exports.RecomendWorkoutPlan = (req, res, next) => {
-    let Training_Location = req.body.training_location
-    let goal = req.body.goal
-    let level = req.body.level
+exports.RecomendWorkoutPlan = async (req, res, next) => {
+
+  const { training_location, goal, level, HWlist, workingOffDays } = req.body;
+
+  req.user.ListOfRequirment.HW = HWlist;
+  req.user.ListOfRequirment.workingOffDays = workingOffDays;
+  req.user.ListOfRequirment.training_location = training_location;
+  req.user.ListOfRequirment.level = level;
+  req.user.ListOfRequirment.goal = goal;
+  try {
+    await req.user.save();
+  } catch (err) {
+    res.status(400).send(err);
+  }
   
-    if (Training_Location == "Home" && goal == "Bulk") { // Completed
+    if (training_location == "Home" && goal == "Bulk") { // Completed
       Exercise.aggregate([
         { $facet: {
             chest: [
@@ -166,7 +176,7 @@ exports.RecomendWorkoutPlan = (req, res, next) => {
     
   
   
-    else if(Training_Location == "Gym" && goal == "Bulk") { // Completed
+    else if(training_location == "Gym" && goal == "Bulk") { // Completed
       Exercise.aggregate([
         { $facet: {
             chest: [
@@ -328,7 +338,7 @@ exports.RecomendWorkoutPlan = (req, res, next) => {
     
   
   
-    else if(Training_Location == "Home" && goal == "Cardio") { // Completed
+    else if(training_location == "Home" && goal == "Cardio") { // Completed
       Exercise.aggregate([
         { $facet: {
             chest: [
@@ -488,7 +498,7 @@ exports.RecomendWorkoutPlan = (req, res, next) => {
     
   
   
-    else if(Training_Location == "Gym" && goal == "Cardio") { // Completed
+    else if(training_location == "Gym" && goal == "Cardio") { // Completed
       Exercise.aggregate([
         { $facet: {
             chest: [
@@ -628,7 +638,7 @@ exports.RecomendWorkoutPlan = (req, res, next) => {
     
   
   
-    else if(Training_Location == "Home" && goal == "Cut") { // Completed
+    else if(training_location == "Home" && goal == "Cut") { // Completed
       Exercise.aggregate([
         { $facet: {
             chest: [
@@ -804,7 +814,7 @@ exports.RecomendWorkoutPlan = (req, res, next) => {
     
     
   
-    else if(Training_Location == "Gym" && goal == "Cut") { // Completed
+    else if(training_location == "Gym" && goal == "Cut") { // Completed
       Exercise.aggregate([
         {
           $facet: {

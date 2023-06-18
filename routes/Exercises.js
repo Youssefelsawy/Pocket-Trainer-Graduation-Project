@@ -24,7 +24,7 @@ router.get('/shoulder/exercises', fetchingExerciseSController.getShoulderExercis
 
 router.get('/abdominals/exercises', fetchingExerciseSController.getAbdominalsExercises);
 
-router.get('/similar/exercises/:exerciseName/:training_location/:goal/:level',isAuth, fetchingExerciseSController.getSimilarExercises);
+router.get('/similar/exercises/:exerciseName',isAuth, fetchingExerciseSController.getSimilarExercises);
 
 
 
