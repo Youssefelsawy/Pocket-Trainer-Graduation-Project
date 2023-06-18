@@ -69,9 +69,9 @@ exports.getExerciseById = async (req, res, next) => {
 };
 
 exports.getSimilarExercises = async (req, res, next) => {
-  const training_location = req.user.training_location
-  const goal = req.user.goal
-  const level = req.user.level
+  const training_location = req.user.ListOfRequirment.training_location
+  const goal = req.user.ListOfRequirment.goal
+  const level = req.user.ListOfRequirment.level
   const exercise = await Exercise.findOne({"Title": req.params.exerciseName});
 
   try{
