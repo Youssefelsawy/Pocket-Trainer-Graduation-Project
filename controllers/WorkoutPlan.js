@@ -4,7 +4,7 @@ exports.RecomendWorkoutPlan = async (req, res, next) => {
 
   const { training_location, goal, level, HWlist, workingOffDays } = req.body;
 
-  req.user.ListOfRequirment.HW = HWlist;
+  req.user.ListOfRequirment.HWlist = HWlist;
   req.user.ListOfRequirment.workingOffDays = workingOffDays;
   req.user.ListOfRequirment.training_location = training_location;
   req.user.ListOfRequirment.level = level;

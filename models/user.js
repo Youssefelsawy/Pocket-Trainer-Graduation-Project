@@ -24,7 +24,7 @@ const userSchema = new Schema({
         contentType: String
     },
     ListOfRequirment: {
-        HW: {
+        HWlist: {
                 height: Number,
                 weight: Number
         }
