@@ -1096,9 +1096,33 @@ exports.ReplaceExercise = async (req, res) => {
 
 
 exports.getWorkoutPlan = (req, res, next) => {
-  req.user
-  .populate()
-  .then(user => {
-    res.send(user.workoutPlan);
-  })
+
+  const workoutDays = {};
+  const dayOff = "dayOff";
+  let i = 0;
+  for (let day in req.user.ListOfRequirment.workingOffDays) {
+    if (req.user.ListOfRequirment.workingOffDays[day] === 1) {
+      if(i == 0){
+        workoutDays[day] = req.user.workoutPlan.ChestDay;
+      }
+      else if(i == 1) {
+        workoutDays[day] = req.user.workoutPlan.BackDay;
+      }
+      else if(i == 2) {
+        workoutDays[day] = req.user.workoutPlan.ShoulderDay;
+      }
+      else if(i == 3) {
+        workoutDays[day] = req.user.workoutPlan.ArmDay;
+      }
+      else if(i == 4) {
+        workoutDays[day] = req.user.workoutPlan.LegDay;
+      }
+      i++;
+    }
+    else {
+      workoutDays[day] = dayOff;
+    }
+  }
+
+  res.send(workoutDays);
 };
