@@ -16,7 +16,7 @@ exports.editProfile = async (req, res) => {
     }
 
     user.name = req.body.name || user.name;
-    consoloe.log(req.body.name)
+    console.log(req.body.name)
 
     if (req.body.password) {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
