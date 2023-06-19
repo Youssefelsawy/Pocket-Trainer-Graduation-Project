@@ -16,15 +16,17 @@ exports.editProfile = async (req, res) => {
     }
 
     user.name = req.body.name || user.name;
+    consoloe.log(req.body.name)
 
     if (req.body.password) {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
       user.password = hashedPassword;
+      console.log(req.body.password)
     }
-    console.log(req.file)
     if (req.file) {
       user.photo.data = fs.readFileSync(req.file.path);
       user.photo.contentType = req.file.mimetype;
+      console.log(req.file)
     }
 
     await user.save();
