@@ -16,6 +16,8 @@ const upload = multer({ dest: 'uploads/' });
 
 const fetchingMealSController = require('../controllers/fetching-meal(s)')
 
+const NutritionPlan = require('../controllers/nutritionPlan');
+
 const WorkoutPlan = require('../controllers/WorkoutPlan');
 
 const deleteExerciseFromWorkoutPlan = require('../controllers/delete-exercise-workoutPlan');
@@ -67,6 +69,8 @@ router.get('/nutritionplan/breakfast', isAuth, fetchingMealSController.getBreakf
 router.get('/nutritionplan/lunch', isAuth, fetchingMealSController.getLunchInNutritionPlan);
 
 router.get('/nutritionplan/dinner', isAuth, fetchingMealSController.getDinnerInNutritionPlan);
+
+router.post('/nutritionplan/recommendation', isAuth, NutritionPlan.RecommendNutritionPlan)
 
 
 
