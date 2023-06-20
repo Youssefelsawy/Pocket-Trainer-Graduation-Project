@@ -1,5 +1,7 @@
 const Meal = require('../models/meal');
 
+
+// get all breakfast, lunch or dinner meals
 exports.getSpecificMeals = (req, res, next) => {
   const mealsType = req.params.mealsType.toLowerCase();
   if(mealsType == 'breakfast') {
@@ -23,17 +25,21 @@ exports.getSpecificMeals = (req, res, next) => {
   }
 }
 
-
   exports.getMealById = (req, res, next) => {
     const mealId = req.params.mealId;
     Meal.findById(mealId) 
       .then(meal => {
-        res.send(meal);
+        if(meal) {
+          res.send(meal);
+        } else if(!meal) {
+          res.send('Meal not found')
+        }
       })
       .catch(err => console.log(err))
-  };
+};
   
 
+// add meal to user nutritiion plan
   exports.postNutritionAddMeal = (req, res, next) => {
     const mealId = req.params.mealId;
     Meal.findById(mealId)
@@ -47,8 +53,9 @@ exports.getSpecificMeals = (req, res, next) => {
         }
       });
       exist = false;
-  };
+};
 
+// delete meal from user nutrition plan
   exports.postNutritionDeleteMeal = (req, res, next) => {
     const mealId = req.params.mealId;
     req.user
@@ -57,9 +64,13 @@ exports.getSpecificMeals = (req, res, next) => {
         res.send(result);
       })
       .catch(err => {console.log(err)});
-  };
+};
 
-  exports.getBreakfastInNutritionPlan = (req, res, next) => {
+
+// get specefic meals from user NutritionPlan
+exports.getSpecificMealsFromNutritionPlan = (req, res, next) => {
+  const mealsType = req.params.mealsType.toLowerCase();
+  if( mealsType == "breakfast" ) {
     req.user
       .populate()
       .then(user => {
@@ -68,26 +79,25 @@ exports.getSpecificMeals = (req, res, next) => {
         })
         res.send(BreakfastMeals);
       })
-    };
-
-  exports.getLunchInNutritionPlan = (req, res, next) => {
+  }
+  else if( mealsType == "lunch" ) {
     req.user
-      .populate()
-      .then(user => {
-        const LunchMeals = user.NutritionPlan.Meals.filter(meal => {
-          return meal.Lunch == 1;
-        })
-        res.send(LunchMeals);
+    .populate()
+    .then(user => {
+      const LunchMeals = user.NutritionPlan.Meals.filter(meal => {
+        return meal.Lunch == 1;
       })
-    };
-
-  exports.getDinnerInNutritionPlan = (req, res, next) => {
+      res.send(LunchMeals);
+    })
+  }
+  else if( mealsType == "dinner" ) {
     req.user
-      .populate()
-      .then(user => {
-        const DinnerMeals = user.NutritionPlan.Meals.filter(meal => {
-          return meal.Dinner == 1;
-        })
-        res.send(DinnerMeals);
+    .populate()
+    .then(user => {
+      const DinnerMeals = user.NutritionPlan.Meals.filter(meal => {
+        return meal.Dinner == 1;
       })
-    };
+      res.send(DinnerMeals);
+    })
+  }
+};
