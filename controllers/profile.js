@@ -147,3 +147,19 @@ exports.resetPassword = async (req, res) => {
     message: "password updated",
   });
 };
+
+
+exports.editworkingOffDays = async (req, res) => {
+  try {
+    const new_schdule = req.body.workingOffDays;
+    if (!new_schdule) {
+      return res.status(400).json({ message: "workingOffDays is required" });
+    }
+    req.user.ListOfRequirment.workingOffDays = new_schdule;
+    await req.user.save();
+    res.status(200).json({ message: "workingOffDays updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};

@@ -60,11 +60,7 @@ router.post('/add-meal-to-nutritionPlan/:mealId', isAuth, fetchingMealSControlle
 
 router.post('/delete-meal-from-nutritionPlan/:mealId', isAuth, fetchingMealSController.postNutritionDeleteMeal);
 
-router.get('/nutritionplan/breakfast', isAuth, fetchingMealSController.getBreakfastInNutritionPlan);
-
-router.get('/nutritionplan/lunch', isAuth, fetchingMealSController.getLunchInNutritionPlan);
-
-router.get('/nutritionplan/dinner', isAuth, fetchingMealSController.getDinnerInNutritionPlan);
+router.get('/nutritionplan/:mealsType', isAuth, fetchingMealSController.getSpecificMealsFromNutritionPlan);
 
 router.post('/nutritionplan/recommendation', isAuth, NutritionPlan.RecommendNutritionPlan)
 
@@ -80,6 +76,8 @@ router.patch('/delete/profile/photo', isAuth, userProfile.deletePhoto)
 router.patch('/forget/password', userProfile.forgotPassword)
 
 router.patch('/reset/password/:token', userProfile.resetPassword)
+
+router.patch('/edit/workingOffDays', isAuth, userProfile.editworkingOffDays)
 
 
 module.exports = router;
