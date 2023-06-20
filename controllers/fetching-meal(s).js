@@ -1,7 +1,8 @@
 const Meal = require('../models/meal');
 
 exports.getBreakfastMeals = (req, res, next) => {
-    Meal.find({'typeofMeal': 'breakfast'})
+  const mealsType = req.params.mealsType
+    Meal.find( {mealsType: mealsType} )
     .then(meals => {
       res.send(meals);
     })
@@ -9,7 +10,7 @@ exports.getBreakfastMeals = (req, res, next) => {
   };
 
   exports.getLunchMeals = (req, res, next) => {
-    Meal.find({'typeofMeal': 'lunch'})
+    Meal.find( {'Lunch': 1} )
     .then(meals => {
       res.status(200).send(meals);
     })
@@ -17,7 +18,7 @@ exports.getBreakfastMeals = (req, res, next) => {
   };
 
   exports.getDinnerMeals = (req, res, next) => {
-    Meal.find({'typeofMeal': 'dinner'})
+    Meal.find( {'Dinner': 1} )
     .then(meals => {
       res.send(meals);
     })
