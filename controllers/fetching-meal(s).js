@@ -43,7 +43,6 @@ exports.getBreakfastMeals = (req, res, next) => {
         if (exist) {
           res.send('this meal already added in your Nutrition Plan');
         }else {
-          console.log(result);
           res.send(result);
         }
       });
@@ -65,7 +64,7 @@ exports.getBreakfastMeals = (req, res, next) => {
       .populate()
       .then(user => {
         const BreakfastMeals = user.NutritionPlan.Meals.filter(meal => {
-          return meal.typeofMeal == 'breakfast';
+          return meal.Breakfast == 1;
         })
         res.send(BreakfastMeals);
       })
@@ -76,7 +75,7 @@ exports.getBreakfastMeals = (req, res, next) => {
       .populate()
       .then(user => {
         const LunchMeals = user.NutritionPlan.Meals.filter(meal => {
-          return meal.typeofMeal == 'lunch';
+          return meal.Lunch == 1;
         })
         res.send(LunchMeals);
       })
@@ -87,7 +86,7 @@ exports.getBreakfastMeals = (req, res, next) => {
       .populate()
       .then(user => {
         const DinnerMeals = user.NutritionPlan.Meals.filter(meal => {
-          return meal.typeofMeal == 'dinner';
+          return meal.Dinner == 1;
         })
         res.send(DinnerMeals);
       })

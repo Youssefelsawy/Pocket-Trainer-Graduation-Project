@@ -2,37 +2,69 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const meal_Schema = new Schema({
-  name: {
+  Food_items: {
     type: String,
     required: true
   },
-  typeofMeal: {
-    type: String,
+  Breakfast: {
+    type: Number,
     required: true
   },
-  protein: {
-    type: String,
+  Lunch: {
+    type: Number,
     required: true
   },
-  calories: {
-    type: String,
+  Dinner: {
+    type: Number,
     required: true
   },
-  fats: {
-    type: String,
+  VegNovVeg: {
+    type: Number,
     required: true
   },
-  carbs: {
-    type: String,
+  Calories: {
+    type: Number,
     required: true
   },
-  imageUrl: {
-    type: String,
+  Fats: {
+    type: Number,
     required: true
   },
-  quantity: {
-    type: String,
-    required: false
+  Proteins: {
+    type: Number,
+    required: true
+  },
+  Iron: {
+    type: Number,
+    required: true
+  },
+  Calcium: {
+    type: Number,
+    required: true
+  },
+  Sodium: {
+    type: Number,
+    required: true
+  },
+  Potassium: {
+    type: Number,
+    required: true
+  },
+  Carbohydrates: {
+    type: Number,
+    required: true
+  },
+  Fibre: {
+    type: Number,
+    required: true
+  },
+  VitaminD: {
+    type: Number,
+    required: true
+  },
+  Sugars: {
+    type: Number,
+    required: true
   }
 });
 

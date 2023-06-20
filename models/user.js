@@ -120,14 +120,22 @@ const userSchema = new Schema({
         Meals: [
             {
                 mealId: { type: Schema.Types.ObjectId, ref: 'Meal', required: true },
-                name: { type: String, required: true },
-                imageUrl: { type: String, required: true },
-                protein: { type: String, required: true },
-                calories: { type: String, required: true },
-                carbs: { type: String, required: true },
-                fats: { type: String, required: true },
-                typeofMeal: { type: String, required: true },
-                quantity: { type: String, required: false }
+                Food_items: { type: String, required: true },
+                Breakfast: { type: Number, required: true },
+                Lunch: { type: Number, required: true },
+                Dinner: { type: Number, required: true },
+                VegNovVeg: { type: Number, required: true },
+                Calories: { type: Number, required: true },
+                Fats: { type: Number, required: true },
+                Proteins: { type: Number, required: true },
+                Iron: { type: Number, required: true },
+                Calcium: { type: Number, required: true },
+                Sodium: { type: Number, required: true },
+                Potassium: { type: Number, required: true },
+                Carbohydrates: { type: Number, required: true },
+                Fibre: { type: Number, required: true },
+                VitaminD: { type: Number, required: true },
+                Sugars: { type: Number, required: true }
             }
         ]
     }
@@ -436,14 +444,22 @@ userSchema.methods.addToNutritionPlan = function(meal) {
     else if (nutritionMealIndex < 0) {
         updatedNutritionPlanMeals.push({
             mealId: meal._id,
-            name: meal.name,
-            imageUrl: meal.imageUrl,
-            fats: meal.fats,
-            carbs: meal.carbs,
-            protein: meal.protein,
-            calories: meal.calories,
-            quantity: meal.quantity,
-            typeofMeal: meal.typeofMeal
+            Food_items: meal.Food_items,
+            Breakfast: meal.Breakfast,
+            Lunch: meal.Lunch,
+            Dinner: meal.Dinner,
+            VegNovVeg: meal.VegNovVeg,
+            Calories: meal.Calories,
+            Fats: meal.Fats,
+            Proteins: meal.Proteins,
+            Iron: meal.Iron,
+            Calcium: meal.Calcium,
+            Sodium: meal.Sodium,
+            Potassium: meal.Potassium,
+            Carbohydrates: meal.Carbohydrates,
+            Fibre: meal.Fibre,
+            VitaminD: meal.VitaminD,
+            Sugars:meal.Sugars
         });
     }
     this.NutritionPlan.Meals = updatedNutritionPlanMeals;
@@ -457,6 +473,33 @@ userSchema.methods.removeFromNutritionPlan = function (mealId) {
     this.NutritionPlan.Meals = updatedNutritionPlanMeals;
     return this.save();
 };
+
+userSchema.methods.addMealsToNutritionPlan = function(meals) {
+    const MNP = []
+    for( let meal of meals ){
+        MNP.push({
+            mealId: meal._id,
+            Food_items: meal.Food_items,
+            Breakfast: meal.Breakfast,
+            Lunch: meal.Lunch,
+            Dinner: meal.Dinner,
+            VegNovVeg: meal.VegNovVeg,
+            Calories: meal.Calories,
+            Fats: meal.Fats,
+            Proteins: meal.Proteins,
+            Iron: meal.Iron,
+            Calcium: meal.Calcium,
+            Sodium: meal.Sodium,
+            Potassium: meal.Potassium,
+            Carbohydrates: meal.Carbohydrates,
+            Fibre: meal.Fibre,
+            VitaminD: meal.VitaminD,
+            Sugars: meal.Sugars
+        })
+    }
+    this.NutritionPlan.Meals = MNP;
+    return this.save();
+}
 
 
 
