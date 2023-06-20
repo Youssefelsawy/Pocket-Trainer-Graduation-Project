@@ -14,7 +14,7 @@ exports.getSpecificMeals = (req, res, next) => {
       res.status(200).send(meals);
     })
     .catch(err => console.log(err));
-  }else if (mealsType == 'Dinner') {
+  }else if (mealsType == 'dinner') {
     Meal.find( {'Dinner': 1} )
     .then(meals => {
       res.send(meals);
