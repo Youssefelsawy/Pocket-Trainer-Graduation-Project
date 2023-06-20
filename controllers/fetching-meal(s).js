@@ -1,29 +1,28 @@
 const Meal = require('../models/meal');
 
-exports.getBreakfastMeals = (req, res, next) => {
-  const mealsType = req.params.mealsType
+exports.getSpecificMeals = (req, res, next) => {
+  const mealsType = req.params.mealsType.toLowerCase();
+  if(mealsType == 'breakfast') {
     Meal.find( {'Breakfast': 1} )
     .then(meals => {
       res.send(meals);
     })
     .catch(err => console.log(err));
-  };
-
-  exports.getLunchMeals = (req, res, next) => {
+  } else if(mealsType == 'lunch') {
     Meal.find( {'Lunch': 1} )
     .then(meals => {
       res.status(200).send(meals);
     })
     .catch(err => console.log(err));
-  };
-
-  exports.getDinnerMeals = (req, res, next) => {
+  }else if (mealsType == 'Dinner') {
     Meal.find( {'Dinner': 1} )
     .then(meals => {
       res.send(meals);
     })
     .catch(err => console.log(err));
-  };
+  }
+}
+
 
   exports.getMealById = (req, res, next) => {
     const mealId = req.params.mealId;

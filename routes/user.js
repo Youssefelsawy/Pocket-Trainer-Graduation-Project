@@ -52,11 +52,7 @@ router.patch('/replace/exercise', isAuth, WorkoutPlan.ReplaceExercise)
 
 
 //Meals Routes
-router.get('/meals/:mealsType', fetchingMealSController.getBreakfastMeals);
-
-router.get('/meals/lunch', fetchingMealSController.getLunchMeals);
-
-router.get('/meals/dinner', fetchingMealSController.getDinnerMeals);
+router.get('/meals/:mealsType', fetchingMealSController.getSpecificMeals);
 
 router.get('/meal/:mealId', fetchingMealSController.getMealById);
 
