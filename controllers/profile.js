@@ -9,6 +9,8 @@ exports.editProfile = async (req, res) => {
   try {
     
     const userId = req.params.userId;
+    console.log(userId)
+    console.log(userId.toString())
     const user = await User.findById(userId);
 
     if (!user) {
