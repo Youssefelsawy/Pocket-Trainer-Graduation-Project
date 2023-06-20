@@ -29,13 +29,15 @@ exports.getSpecificMeals = (req, res, next) => {
     const mealId = req.params.mealId;
     Meal.findById(mealId) 
       .then(meal => {
-        if(meal) {
-          res.send(meal);
-        } else if(!meal) {
+        if(!meal) {
           res.send('Meal not found')
-        }
+        } 
+        res.send(meal);
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        res.status(500).json({ message: "Internal server error" });
+      })
 };
   
 
@@ -67,7 +69,7 @@ exports.getSpecificMeals = (req, res, next) => {
 };
 
 
-// get specefic meals from user NutritionPlan
+// get specific meals from user NutritionPlan
 exports.getSpecificMealsFromNutritionPlan = (req, res, next) => {
   const mealsType = req.params.mealsType.toLowerCase();
   if( mealsType == "breakfast" ) {
