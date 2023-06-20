@@ -151,9 +151,9 @@ exports.resetPassword = async (req, res) => {
 
 exports.editworkingOffDays = async (req, res) => {
   try {
-    const new_schdule = req.body;
+    const new_schdule = req.body.workingOffDays;
     if (!new_schdule) {
-      return res.status(400).json({ message: "workingOffDays is required" });
+      return res.status(400).json({ message: "Your Schedule is required" });
     }
     req.user.ListOfRequirment.workingOffDays = new_schdule;
     await req.user.save();
