@@ -9,8 +9,7 @@ exports.editProfile = async (req, res) => {
   try {
     
     const userId = req.params.userId;
-    console.log(userId)
-    console.log(userId.toString())
+    console.log(req.body)
     const user = await User.findById(userId);
 
     if (!user) {
@@ -18,17 +17,14 @@ exports.editProfile = async (req, res) => {
     }
 
     user.name = req.body.name || user.name;
-    console.log(req.body.name)
 
     if (req.body.password) {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
       user.password = hashedPassword;
-      console.log(req.body.password)
     }
     if (req.file) {
       user.photo.data = fs.readFileSync(req.file.path);
       user.photo.contentType = req.file.mimetype;
-      console.log(req.file)
     }
 
     await user.save();
