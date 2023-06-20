@@ -16,11 +16,12 @@ exports.RecommendNutritionPlan = (req, res, next) => {
       const headers = {
         'Content-Type': 'application/x-www-form-urlencoded'
       };
-    /*formData, { headers }*/
+
     axios.post('https://diet-model.onrender.com/predict', requestData, { headers })
       .then(response => {
         const serializedData = CircularJSON.stringify(response.data);
-        res.send(serializedData)
+        const meals = [...serializedData[food_items]]
+        res.send(meals)
       })
       .catch(error => {
         // Handle the error

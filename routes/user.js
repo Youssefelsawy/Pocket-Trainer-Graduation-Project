@@ -75,7 +75,7 @@ router.post('/nutritionplan/recommendation', isAuth, NutritionPlan.RecommendNutr
 
 
 // profile
-router.put('/edit/profile', isAuth, upload.single('photo'), userProfile.editProfile);
+router.put('/edit/profile/:userId', isAuth, upload.single('photo'), userProfile.editProfile);
 
 router.delete('/delete/profile', isAuth, userProfile.deleteProfile)
 

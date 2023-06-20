@@ -8,7 +8,7 @@ const crypto = require("crypto");
 exports.editProfile = async (req, res) => {
   try {
     
-    const userId = req.body.userId;
+    const userId = req.params.userId;
     const user = await User.findById(userId);
 
     if (!user) {
