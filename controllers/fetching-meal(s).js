@@ -2,7 +2,7 @@ const Meal = require('../models/meal');
 
 exports.getBreakfastMeals = (req, res, next) => {
   const mealsType = req.params.mealsType
-    Meal.find( {mealsType: mealsType} )
+    Meal.find( {'Breakfast': 1} )
     .then(meals => {
       res.send(meals);
     })
