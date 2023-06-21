@@ -28,6 +28,7 @@ exports.RecommendNutritionPlan = async (req, res, next) => {
 
     for (const foodItem of foodItems) {
       let meal = await Meal.findOne({ "Food_items": foodItem });
+      console.log(meal)
       meals.push(meal);
     }
     await req.user.CalculatingValueOfNutrients(meals)

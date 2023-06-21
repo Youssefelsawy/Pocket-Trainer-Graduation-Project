@@ -65,6 +65,14 @@ const meal_Schema = new Schema({
   Sugars: {
     type: Number,
     required: true
+  },
+  iamgeUrl: {
+    type: Number,
+    required: true
+  },
+  Ingredients: {
+    type: Number,
+    required: true
   }
 });
 

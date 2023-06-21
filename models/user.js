@@ -136,8 +136,8 @@ const userSchema = new Schema({
                 Fibre: { type: Number, required: true },
                 VitaminD: { type: Number, required: true },
                 Sugars: { type: Number, required: true },
-                imageUrl: { type: String, required: false },
-                Ingredients: { type: String, required: false },
+                imageUrl: { type: String, required: true },
+                Ingredients: { type: String, required: true },
             }
         ],
         NutritionValues:{
@@ -514,6 +514,7 @@ userSchema.methods.addMealsToNutritionPlan = function(meals) {
             Sugars: meal.Sugars,
             imageUrl: meal.imageUrl,
             Ingredients: meal.Ingredients
+            
         })
     }
     this.NutritionPlan.Meals = MNP;
