@@ -135,7 +135,24 @@ const userSchema = new Schema({
                 Carbohydrates: { type: Number, required: true },
                 Fibre: { type: Number, required: true },
                 VitaminD: { type: Number, required: true },
-                Sugars: { type: Number, required: true }
+                Sugars: { type: Number, required: true },
+                imageUrl: { type: String, required: true },
+                Ingredients: { type: String, required: true },
+            }
+        ],
+        NutritionValues:[
+            {
+                Calories: { type: Number },
+                Fats: { type: Number },
+                Proteins: { type: Number },
+                Iron: { type: Number },
+                Calcium: { type: Number },
+                Sodium: { type: Number },
+                Potassium: { type: Number },
+                Carbohydrates: { type: Number },
+                Fibre: { type: Number },
+                VitaminD: { type: Number },
+                Sugars: { type: Number }
             }
         ]
     }
@@ -459,7 +476,9 @@ userSchema.methods.addToNutritionPlan = function(meal) {
             Carbohydrates: meal.Carbohydrates,
             Fibre: meal.Fibre,
             VitaminD: meal.VitaminD,
-            Sugars:meal.Sugars
+            Sugars:meal.Sugars,
+            imageUrl: meal.imageUrl,
+            Ingredients: meal.Ingredients
         });
     }
     this.NutritionPlan.Meals = updatedNutritionPlanMeals;
@@ -494,11 +513,61 @@ userSchema.methods.addMealsToNutritionPlan = function(meals) {
             Carbohydrates: meal.Carbohydrates,
             Fibre: meal.Fibre,
             VitaminD: meal.VitaminD,
-            Sugars: meal.Sugars
+            Sugars: meal.Sugars,
+            imageUrl: meal.imageUrl,
+            Ingredients: meal.Ingredients
         })
     }
     this.NutritionPlan.Meals = MNP;
     return this.save();
+}
+
+// calculate total Nutrition values of meals
+userSchema.methods.CalculatingValueOfNutrients = function(meals) {
+    let totalCalories = 0;
+    let totalSugars = 0;
+    let totalVitaminD = 0;
+    let totalFibre = 0;
+    let totalCarbohydrates = 0;
+    let totalPotassium = 0;
+    let totalSodium = 0;
+    let totalCalcium = 0;
+    let totalIron = 0;
+    let totalProteins = 0;
+    let totalFats = 0;
+    for(mealo of meals) {
+        totalCalories += mealo.Calories;
+        totalSugars += mealo.Sugars;
+        totalVitaminD += mealo.VitaminD;
+        totalFibre += mealo.Fibre;
+        totalCarbohydrates += mealo.Carbohydrates;
+        totalPotassium += mealo.Potassium;
+        totalSodium += mealo.Sodium;
+        totalCalcium += mealo.Calcium;
+        totalIron += mealo.Iron;
+        totalProteins += mealo.Proteins;
+        totalFats += mealo.Fats;
+    }
+    this.NutritionPlan.NutritionValues.Calories = totalCalories;
+    this.NutritionPlan.NutritionValues.Sugars = totalSugars;
+    console.log(this.NutritionPlan.NutritionValues.Sugars)
+    this.NutritionPlan.NutritionValues.VitaminD = totalVitaminD;
+    this.NutritionPlan.NutritionValues.Fibre = totalFibre;
+    this.NutritionPlan.NutritionValues.Carbohydrates = totalCarbohydrates;
+    this.NutritionPlan.NutritionValues.Potassium = totalPotassium;
+    this.NutritionPlan.NutritionValues.Sodium = totalSodium;
+    this.NutritionPlan.NutritionValues.Calcium = totalCalcium;
+    this.NutritionPlan.NutritionValues.Iron = totalIron;
+    this.NutritionPlan.NutritionValues.Proteins = totalProteins;
+    this.NutritionPlan.NutritionValues.Fats = totalFats;
+    return this.save()
+        .then(() => {
+            console.log('CalculatingValueOfNutrients saved successfully');
+        })
+        .catch((error) => {
+            console.log('CalculatingValueOfNutrients save error:', error);
+            throw error;
+        });
 }
 
 

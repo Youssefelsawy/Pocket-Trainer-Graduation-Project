@@ -65,10 +65,12 @@ exports.deletePhoto = async (req, res) => {
 
 
 exports.forgotPassword = async (req, res) => {
+    //1)Get user based on email
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
       res.status(404).send("user does not exist")
     } else {
+      //2)Generate random token
         const resetToken = await user.createPasswordResetToken();
         await user.save({ validateBeforeSave: false });
         res.status(200).json({

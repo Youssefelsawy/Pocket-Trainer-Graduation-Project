@@ -4,6 +4,8 @@ const Meal = require('../models/meal');
 
 
 exports.RecommendNutritionPlan = async (req, res, next) => {
+  
+  // first taking attributes that will send to python model
   const requestData = {
     age: req.body.age,
     veg_non_veg: req.body.veg_non_veg,
@@ -18,21 +20,26 @@ exports.RecommendNutritionPlan = async (req, res, next) => {
   };
 
   try {
+    // send request to machine learning diet model with requestData
     const response = await axios.post('https://diet-model.onrender.com/predict', requestData, { headers });
     const diet_type = CircularJSON.stringify(response.data.diet_type);
     const foodItems = response.data.food_items;
     let meals = [];
 
     for (const foodItem of foodItems) {
-      const meal = await Meal.findOne({ "Food_items": foodItem });
+      let meal = await Meal.findOne({ "Food_items": foodItem });
       meals.push(meal);
     }
-    req.user.addMealsToNutritionPlan(meals)
-    .then(result => {
-      res.send(result);
+    return req.user.CalculatingValueOfNutrients(meals)
+    .then(() => {
+      res.send(req.user.NutritionPlan.NutritionValues)
     })
+    // req.user.addMealsToNutritionPlan(meals)
+    // .then(() => {
+    //   res.json({message: "Success"});
+    // })
   } catch (error) {
-    console.error(error);
-    // Handle the error
+    console.log(error);
+    res.status(200).json({message: "try again"})
   }
 };

@@ -68,6 +68,7 @@ exports.getExerciseById = async (req, res, next) => {
   }
 };
 
+// get similar exercises to the exercises in user workout plan
 exports.getSimilarExercises = async (req, res, next) => {
   const training_location = req.user.ListOfRequirment.training_location
   const goal = req.user.ListOfRequirment.goal

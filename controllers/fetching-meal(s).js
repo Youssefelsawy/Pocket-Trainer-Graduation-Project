@@ -2,7 +2,7 @@ const Meal = require('../models/meal');
 
 
 // get all breakfast, lunch or dinner meals
-exports.getSpecificMeals = (req, res, next) => {
+exports.getSpecificMeals = (req, res) => {
   const mealsType = req.params.mealsType.toLowerCase();
   if(mealsType == 'breakfast') {
     Meal.find( {'Breakfast': 1} )
@@ -25,7 +25,7 @@ exports.getSpecificMeals = (req, res, next) => {
   }
 }
 
-  exports.getMealById = (req, res, next) => {
+  exports.getMealById = (req, res) => {
     const mealId = req.params.mealId;
     Meal.findById(mealId) 
       .then(meal => {
@@ -42,7 +42,7 @@ exports.getSpecificMeals = (req, res, next) => {
   
 
 // add meal to user nutritiion plan
-  exports.postNutritionAddMeal = (req, res, next) => {
+exports.postNutritionAddMeal = (req, res) => {
     const mealId = req.params.mealId;
     Meal.findById(mealId)
       .then(meal => {
@@ -58,7 +58,7 @@ exports.getSpecificMeals = (req, res, next) => {
 };
 
 // delete meal from user nutrition plan
-  exports.postNutritionDeleteMeal = (req, res, next) => {
+  exports.postNutritionDeleteMeal = (req, res) => {
     const mealId = req.params.mealId;
     req.user
       .removeFromNutritionPlan(mealId)
@@ -69,8 +69,8 @@ exports.getSpecificMeals = (req, res, next) => {
 };
 
 
-// get specific meals from user NutritionPlan
-exports.getSpecificMealsFromNutritionPlan = (req, res, next) => {
+// get specific meals from user Nutrition Plan
+exports.getSpecificMealsFromNutritionPlan = (req, res) => {
   const mealsType = req.params.mealsType.toLowerCase();
   if( mealsType == "breakfast" ) {
     req.user
