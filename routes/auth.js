@@ -7,8 +7,6 @@ const authinticationController = require('../controllers/auth');
 const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
-  
-router.get('/login/:email', authinticationController.getLogin);
 
 router.post('/loggedin', authinticationController.postLogin);
 
