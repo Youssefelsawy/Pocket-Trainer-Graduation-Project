@@ -136,12 +136,11 @@ const userSchema = new Schema({
                 Fibre: { type: Number, required: true },
                 VitaminD: { type: Number, required: true },
                 Sugars: { type: Number, required: true },
-                imageUrl: { type: String, required: true },
-                Ingredients: { type: String, required: true },
+                imageUrl: { type: String, required: false },
+                Ingredients: { type: String, required: false },
             }
         ],
-        NutritionValues:[
-            {
+        NutritionValues:{
                 Calories: { type: Number },
                 Fats: { type: Number },
                 Proteins: { type: Number },
@@ -154,7 +153,6 @@ const userSchema = new Schema({
                 VitaminD: { type: Number },
                 Sugars: { type: Number }
             }
-        ]
     }
 });
 
@@ -523,7 +521,7 @@ userSchema.methods.addMealsToNutritionPlan = function(meals) {
 }
 
 // calculate total Nutrition values of meals
-userSchema.methods.CalculatingValueOfNutrients = function(meals) {
+userSchema.methods.CalculatingValueOfNutrients = async function(meals) {
     let totalCalories = 0;
     let totalSugars = 0;
     let totalVitaminD = 0;
@@ -550,7 +548,6 @@ userSchema.methods.CalculatingValueOfNutrients = function(meals) {
     }
     this.NutritionPlan.NutritionValues.Calories = totalCalories;
     this.NutritionPlan.NutritionValues.Sugars = totalSugars;
-    console.log(this.NutritionPlan.NutritionValues.Sugars)
     this.NutritionPlan.NutritionValues.VitaminD = totalVitaminD;
     this.NutritionPlan.NutritionValues.Fibre = totalFibre;
     this.NutritionPlan.NutritionValues.Carbohydrates = totalCarbohydrates;
@@ -560,14 +557,7 @@ userSchema.methods.CalculatingValueOfNutrients = function(meals) {
     this.NutritionPlan.NutritionValues.Iron = totalIron;
     this.NutritionPlan.NutritionValues.Proteins = totalProteins;
     this.NutritionPlan.NutritionValues.Fats = totalFats;
-    return this.save()
-        .then(() => {
-            console.log('CalculatingValueOfNutrients saved successfully');
-        })
-        .catch((error) => {
-            console.log('CalculatingValueOfNutrients save error:', error);
-            throw error;
-        });
+    await this.save()
 }
 
 

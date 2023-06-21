@@ -30,16 +30,11 @@ exports.RecommendNutritionPlan = async (req, res, next) => {
       let meal = await Meal.findOne({ "Food_items": foodItem });
       meals.push(meal);
     }
-    return req.user.CalculatingValueOfNutrients(meals)
-    .then(() => {
-      res.send(req.user.NutritionPlan.NutritionValues)
-    })
-    // req.user.addMealsToNutritionPlan(meals)
-    // .then(() => {
-    //   res.json({message: "Success"});
-    // })
+    await req.user.CalculatingValueOfNutrients(meals)
+    await req.user.addMealsToNutritionPlan(meals)
+    res.json({message: 'success'})
   } catch (error) {
     console.log(error);
-    res.status(200).json({message: "try again"})
+    res.status(200).json({message: "something happen try again"})
   }
 };
