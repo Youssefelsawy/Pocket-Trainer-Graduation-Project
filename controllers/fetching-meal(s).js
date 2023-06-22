@@ -27,7 +27,7 @@ exports.getSpecificMeals = (req, res) => {
 
   exports.getMealById = (req, res) => {
     const mealId = req.params.mealId;
-    Meal.findById(mealId) 
+    Meal.findById(mealId)
       .then(meal => {
         if(!meal) {
           res.send('Meal not found')
@@ -46,6 +46,7 @@ exports.postNutritionAddMeal = (req, res) => {
     const mealId = req.params.mealId;
     Meal.findById(mealId)
       .then(meal => {
+        console.log(meal)
         return req.user.addToNutritionPlan(meal);
       }).then(result => {
         if (exist) {

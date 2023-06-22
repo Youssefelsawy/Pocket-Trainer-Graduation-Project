@@ -66,12 +66,12 @@ const meal_Schema = new Schema({
     type: Number,
     required: true
   },
-  iamgeUrl: {
-    type: Number,
+  imageUrl: {
+    type: String,
     required: true
   },
   Ingredients: {
-    type: Number,
+    type: String,
     required: true
   }
 });
